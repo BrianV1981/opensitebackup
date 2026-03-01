@@ -95,6 +95,7 @@
 - Added CI env-validation matrix script (`scripts/validate_env_matrix_ci.sh`) and workflow gate.
 - Added profile-aware onboarding fast paths (`scripts/session_prep.sh --profile`, `scripts/quick_run.sh --profile`).
 - Added `docs/FINAL_EVIDENCE_SUMMARY.md` to consolidate red-team closure + gate evidence for reviewer handoff.
+- Verify flow now handles empty/missing backup state gracefully with clear first-run guidance (instead of raw `ls` failure).
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
