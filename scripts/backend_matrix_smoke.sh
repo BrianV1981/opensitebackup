@@ -35,21 +35,36 @@ bash "$OSB_HOME/scripts/02_verify_backup.sh"
 
 echo "[matrix 3/3] backend upload matrix"
 
+hard_fail=0
+
 # local is always expected to pass
-run_backend local
+if ! run_backend local; then
+  hard_fail=1
+fi
 
 # gog/rclone run conditionally based on available env/tools
 if command -v gog >/dev/null 2>&1 && [[ -n "${DRIVE_ACCOUNT:-}" && -n "${DRIVE_DB_FOLDER_ID:-}" && -n "${DRIVE_FILES_FOLDER_ID:-}" && -n "${DRIVE_MANIFESTS_FOLDER_ID:-}" ]]; then
-  run_backend gog || true
+  if ! run_backend gog; then
+    echo "[$(date -Is)] WARN backend=gog failed (optional backend)" | tee -a "$MATRIX_LOG"
+  fi
 else
   echo "[$(date -Is)] SKIP backend=gog reason=missing_tool_or_env" | tee -a "$MATRIX_LOG"
 fi
 
 if command -v rclone >/dev/null 2>&1 && [[ -n "${RCLONE_REMOTE:-}" ]]; then
-  run_backend rclone || true
+  if ! run_backend rclone; then
+    echo "[$(date -Is)] WARN backend=rclone failed (optional backend)" | tee -a "$MATRIX_LOG"
+  fi
 else
   echo "[$(date -Is)] SKIP backend=rclone reason=missing_tool_or_env" | tee -a "$MATRIX_LOG"
 fi
 
 echo "BACKEND_MATRIX_SMOKE: complete"
 echo "log=$MATRIX_LOG"
+
+if [[ $hard_fail -ne 0 ]]; then
+  echo "BACKEND_MATRIX_SMOKE: FAIL (required local backend failed)"
+  exit 1
+fi
+
+echo "BACKEND_MATRIX_SMOKE: PASS (required local backend ok)"
