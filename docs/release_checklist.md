@@ -40,6 +40,7 @@ Use this checklist before promoting `dev` changes to `main`.
 - [ ] includes strict preflight evidence
 - [ ] includes pre_release_check evidence
 - [ ] includes launch packet evidence (`data/state/launch_go_no_go_packet.md`)
+- [ ] includes PR evidence bundle (`bash scripts/prepare_pr_evidence.sh` -> `data/state/pr_evidence.md`)
 - [ ] includes rollback notes and known caveats
 
 ## 6) Merge + tagging

@@ -126,6 +126,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/backend_matrix_smoke.sh`
 - `scripts/release_prepare.sh` (generates release readiness evidence report)
 - `scripts/generate_launch_packet.sh` (generates go/no-go decision packet)
+- `scripts/prepare_pr_evidence.sh` (builds PR-ready evidence markdown)
 - `scripts/status_snapshot.sh` (quick operator status summary)
 - `scripts/doctor.sh` (non-destructive health diagnostics)
 - `scripts/init_drive_structure.sh` (optional Google Drive folder bootstrap)

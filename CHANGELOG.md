@@ -100,6 +100,7 @@
 - Backend matrix now hard-fails only on required `local` backend; optional cloud backend failures are surfaced as warnings.
 - Added `OSB_MATRIX_INCLUDE_OPTIONAL_BACKENDS` control (default `0` in env example) so doctor/matrix can avoid cloud uploads unless explicitly enabled.
 - Improved Drive init output contract to emit canonical `export DRIVE_*` lines; setup wizard now appends these directly.
+- Added `scripts/prepare_pr_evidence.sh` to generate reviewer-ready evidence bundle from release artifacts.
 - Verify flow now handles empty/missing backup state gracefully with clear first-run guidance (instead of raw `ls` failure).
 - Setup wizard now prompts for `DRIVE_ACCOUNT` when `gog` backend is selected and can auto-wire Drive init IDs.
 - Quick run now emits a clear stage-specific SSH guidance hint when backup auth fails.
