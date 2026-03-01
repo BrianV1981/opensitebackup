@@ -91,6 +91,12 @@ Optional restore drill:
 bash scripts/04_restore_local.sh
 ```
 
+Cloud-to-local restore test (directly from Google Drive file IDs):
+
+```bash
+bash scripts/05_restore_from_drive.sh
+```
+
 ---
 
 ## Runtime scripts (canonical)
@@ -99,6 +105,7 @@ bash scripts/04_restore_local.sh
 - `scripts/02_verify_backup.sh`
 - `scripts/03_upload_to_drive.sh`
 - `scripts/04_restore_local.sh`
+- `scripts/05_restore_from_drive.sh`
 - `scripts/preflight.sh`
 - `scripts/lint.sh`
 - `scripts/run_all.sh`

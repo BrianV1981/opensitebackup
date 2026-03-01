@@ -9,3 +9,7 @@
 
 ### Changed
 - `scripts/01_pull_live_backup.sh` now auto-removes an empty timestamp run directory if a run fails early (prevents buildup of empty backup folders).
+
+### Added
+- `scripts/05_restore_from_drive.sh` for direct Google Drive file-ID restore drills.
+- Recovery checkpoint document after validated cloud->local restore (`docs/recovery_checkpoint.md`).
