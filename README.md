@@ -111,6 +111,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/run_all.sh`
 - `scripts/collect_restore_metrics.sh`
 - `scripts/demo_restore_run.sh`
+- `scripts/pre_release_check.sh`
 
 Core implementation paths:
 - `adapters/wordpress/`
