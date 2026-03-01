@@ -8,6 +8,11 @@
 - Upload backend selector via `OSB_BACKEND` in `scripts/03_upload_to_drive.sh`.
 - Restore post-check summary output line:
   - `RESTORE_SUMMARY siteurl=... blogname=... pages=...`
+- `rclone` backend implementation with upload logging and `RCLONE_REMOTE` validation.
+
+### Security/Hardening
+- Removed hardcoded local DB credentials from restore flow.
+- Drive-restore wp-config rewrite now uses env-provided DB values (`LOCAL_DB_*`).
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
