@@ -89,6 +89,7 @@
 - Added onboarding scripts `scripts/session_prep.sh`, `scripts/quick_run.sh`, and Drive bootstrap script `scripts/init_drive_structure.sh`.
 - Session prep now supports non-interactive environments via `OSB_SESSION_PREP_SKIP_SSH_TEST=1` fallback path.
 - Archived red-team directive to `docs/archive/RED_TEAM_FIX_LIST.closed.md` and added `docs/DOCS_INDEX.md` canonical map.
+- Clarified docs and runbook language that `gog` is optional support, not a prerequisite backend.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
