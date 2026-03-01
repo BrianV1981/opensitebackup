@@ -14,6 +14,10 @@ Populate required variables in `config/env.sh` for the selected backend.
 
 ## Upload failures
 
+Cloud backends (`gog`, `rclone`) support bounded retries via:
+- `OSB_UPLOAD_RETRIES`
+- `OSB_UPLOAD_RETRY_DELAY_SEC`
+
 ### Unknown backend
 Ensure `OSB_BACKEND` is one of:
 

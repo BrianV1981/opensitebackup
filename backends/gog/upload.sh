@@ -15,6 +15,23 @@ LOCALSUMS="$LATEST/local_sha256.txt"
 
 [[ -f "$MANIFEST" ]] || { echo "Run 02_verify_backup.sh first"; exit 1; }
 
+retry_upload() {
+  local tries="${OSB_UPLOAD_RETRIES:-2}"
+  local delay="${OSB_UPLOAD_RETRY_DELAY_SEC:-3}"
+  local n=1
+  while true; do
+    if "$@"; then
+      return 0
+    fi
+    if (( n >= tries )); then
+      return 1
+    fi
+    echo "[$(date -Is)] WARN upload failed attempt=${n}/${tries}; retrying in ${delay}s"
+    sleep "$delay"
+    n=$((n+1))
+  done
+}
+
 upload_with_log() {
   local file="$1"
   local parent="$2"
@@ -24,7 +41,7 @@ upload_with_log() {
   local start end dur
   start=$(date +%s)
   echo "[$(date -Is)] START upload: $label | $(basename "$file") | size=$size"
-  gog drive upload "$file" --account "$DRIVE_ACCOUNT" --parent "$parent" --no-input
+  retry_upload gog drive upload "$file" --account "$DRIVE_ACCOUNT" --parent "$parent" --no-input
   end=$(date +%s)
   dur=$((end-start))
   echo "[$(date -Is)] DONE  upload: $label | duration=${dur}s"
