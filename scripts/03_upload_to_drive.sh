@@ -9,8 +9,13 @@ source "$ENV_FILE"
 BACKEND="${OSB_BACKEND:-gog}"
 BACKEND_SCRIPT="$OSB_HOME/backends/${BACKEND}/upload.sh"
 
-if [[ ! -x "$BACKEND_SCRIPT" && ! -f "$BACKEND_SCRIPT" ]]; then
+if [[ ! -f "$BACKEND_SCRIPT" ]]; then
   echo "Unknown backend: $BACKEND (expected: local|gog|rclone)" >&2
+  exit 60
+fi
+
+if [[ ! -x "$BACKEND_SCRIPT" ]]; then
+  echo "Backend script is not executable: $BACKEND_SCRIPT" >&2
   exit 60
 fi
 

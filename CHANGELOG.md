@@ -13,6 +13,10 @@
 ### Security/Hardening
 - Removed hardcoded local DB credentials from restore flow.
 - Drive-restore wp-config rewrite now uses env-provided DB values (`LOCAL_DB_*`).
+- Tightened backend launcher validation to require existing + executable backend scripts.
+
+### Cleanup
+- Removed temporary internal implementation directive after integrating execution items.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
