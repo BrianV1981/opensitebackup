@@ -32,6 +32,7 @@
 ### Docs
 - Synced root + `docs/` handoff/runbook/contributing docs with current architecture and execution flow.
 - Removed stale `rclone` scaffold wording and aligned operational checklists with backend/env requirements.
+- Added first-class `docs/runbook.md` and `docs/troubleshooting.md` and linked them in README + handoff docs.
 
 ### Added
 - `scripts/pre_release_check.sh` as a release gate (syntax + strict preflight + verify + local upload smoke, optional destructive restore drill).
