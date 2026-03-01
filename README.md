@@ -136,8 +136,10 @@ Backend selection:
 ## Documentation
 
 - Architecture: `docs/architecture.md`
+- Architecture decisions (ADR-style): `docs/architecture_decisions.md`
 - Operator runbook: `docs/runbook.md`
 - Troubleshooting: `docs/troubleshooting.md`
+- Troubleshooting matrix: `docs/troubleshooting_matrix.md`
 - Self-contained mode: `docs/self_contained_mode.md`
 - Infra quickstart: `docs/infra_quickstart.md`
 - Handoff pack: `docs/HANDOFF_PACK.md`

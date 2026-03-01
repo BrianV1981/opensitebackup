@@ -210,6 +210,8 @@ opensitebackup/
 ### Acceptance criteria
 - New engineer can run first backup from docs only
 - New operator can run restore drill from docs only
+- Architecture decisions are documented (`docs/architecture_decisions.md`)
+- Troubleshooting matrix is documented (`docs/troubleshooting_matrix.md`)
 - All scripts have usage blocks and examples
 
 ---

@@ -51,6 +51,11 @@
 ### Added
 - `scripts/backend_matrix_smoke.sh` for Phase 3 backend validation (local/gog/rclone upload smoke with skip-aware logging).
 - `docs/backend_validation_matrix.md` to standardize backend reliability checks and evidence capture.
+- `docs/architecture_decisions.md` to capture core v1 technical decisions.
+- `docs/troubleshooting_matrix.md` for fast stage->symptom->action operations support.
+
+### Phase status
+- Phase 4 (docs/handoff quality) closed with runbook + troubleshooting + architecture decisions + troubleshooting matrix + release checklist coverage.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.

@@ -34,6 +34,8 @@ Use this checklist when transferring execution to another engineering team.
 - [ ] `docs/positioning_and_gtm.md` reviewed
 - [ ] `docs/runbook.md` reviewed
 - [ ] `docs/troubleshooting.md` reviewed
+- [ ] `docs/architecture_decisions.md` reviewed
+- [ ] `docs/troubleshooting_matrix.md` reviewed
 
 ---
 
