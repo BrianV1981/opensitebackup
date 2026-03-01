@@ -12,6 +12,7 @@ Use this checklist before promoting `dev` changes to `main`.
 
 - [ ] `bash scripts/preflight.sh --strict`
 - [ ] `bash scripts/pre_release_check.sh`
+- [ ] `bash scripts/backend_matrix_smoke.sh`
 - [ ] `RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh` (when intentional)
 - [ ] CI is green on PR
 
