@@ -88,6 +88,7 @@
 - Added run-id logging helper (`scripts/log.sh`) and optional JSON logging mode support in core entrypoints.
 - Added onboarding scripts `scripts/session_prep.sh`, `scripts/quick_run.sh`, and Drive bootstrap script `scripts/init_drive_structure.sh`.
 - Added `scripts/use_site_profile.sh` and profile save/switch flow (`config/sites/<slug>.env`) for multi-site operations.
+- Added `scripts/ssh_troubleshoot.sh` for guided SSH diagnostics and fix hints.
 - Session prep now supports non-interactive environments via `OSB_SESSION_PREP_SKIP_SSH_TEST=1` fallback path.
 - Archived red-team directive to `docs/archive/RED_TEAM_FIX_LIST.closed.md` and added `docs/DOCS_INDEX.md` canonical map.
 - Clarified docs and runbook language that `gog` is optional support, not a prerequisite backend.

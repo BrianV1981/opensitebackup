@@ -12,6 +12,15 @@ bash scripts/preflight.sh --strict
 ### `MISSING ENV: ...`
 Populate required variables in `config/env.sh` for the selected backend.
 
+### SSH auth failures (`Permission denied (publickey...)`)
+Run:
+
+```bash
+bash scripts/ssh_troubleshoot.sh
+```
+
+Then apply suggested key permission/auth fixes and rerun `scripts/session_prep.sh`.
+
 ## Upload failures
 
 Cloud backends (`gog`, `rclone`) support bounded retries via:
