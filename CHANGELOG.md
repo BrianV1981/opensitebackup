@@ -85,6 +85,7 @@
 - Added stale-lock recovery controls (`OSB_LOCK_TIMEOUT_SEC`, `OSB_LOCK_CLEAR_STALE`) to lock wrapper.
 - Added RC-mode restore enforcement (`OSB_RC_MODE`) in pre-release checks.
 - Added `UPLOAD_VERIFY_SUMMARY` markers for cloud backends (`gog`, `rclone`).
+- Added run-id logging helper (`scripts/log.sh`) and optional JSON logging mode support in core entrypoints.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.

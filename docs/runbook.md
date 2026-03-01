@@ -90,6 +90,7 @@ RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh
 - Never commit secrets or runtime artifacts
 - Keep `main` stable; perform active integration on dev branch
 - Locking is enforced for backup/upload/restore; stale lock handling uses `OSB_LOCK_TIMEOUT_SEC` + `OSB_LOCK_CLEAR_STALE`
+- Logging includes a run identifier (`OSB_RUN_ID`) and supports JSON mode (`OSB_LOG_JSON=1`) for machine parsing
 
 ## 8) Retention and cleanup
 

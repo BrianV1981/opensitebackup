@@ -4,16 +4,19 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OSB_HOME="${OSB_HOME:-$(cd "$SCRIPT_DIR/.." && pwd)}"
 
-echo "[run_all 1/4] Strict preflight"
+# shellcheck source=/dev/null
+source "$OSB_HOME/scripts/log.sh"
+osb_log INFO "run_all start"
+osb_log INFO "stage" "name=preflight"
 bash "$OSB_HOME/scripts/preflight.sh" --strict
 
-echo "[run_all 2/4] Pull live backup"
+osb_log INFO "stage" "name=backup"
 bash "$OSB_HOME/scripts/01_pull_live_backup.sh"
 
-echo "[run_all 3/4] Verify backup artifacts"
+osb_log INFO "stage" "name=verify"
 bash "$OSB_HOME/scripts/02_verify_backup.sh"
 
-echo "[run_all 4/4] Upload with backend=${OSB_BACKEND:-gog}"
+osb_log INFO "stage" "name=upload" "backend=${OSB_BACKEND:-local}"
 bash "$OSB_HOME/scripts/03_upload_to_drive.sh"
 
-echo "RUN_ALL: OK"
+osb_log INFO "RUN_ALL OK"
