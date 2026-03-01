@@ -22,8 +22,9 @@ Last reviewed: 2026-03-01
 - `docs/launch_readiness.md`
 - `docs/go_no_go.md`
 - `docs/release_notes_template.md`
+- `docs/FINAL_EVIDENCE_SUMMARY.md`
 - `docs/troubleshooting_matrix.md`
-- `docs/self_contained_mode.md`
+- `docs/self_contained_mode.md
 - `docs/HANDOFF_PACK.md`
 - `docs/documentation_policy.md`
 - `docs/positioning_and_gtm.md`

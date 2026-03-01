@@ -164,6 +164,7 @@ Backend selection:
 - Go/No-Go guide: `docs/go_no_go.md`
 - Release notes template: `docs/release_notes_template.md`
 - Backend validation matrix: `docs/backend_validation_matrix.md`
+- Final evidence summary (dev): `docs/FINAL_EVIDENCE_SUMMARY.md`
 - TUI setup flow spec: `docs/TUI_SETUP_FLOW.md`
 - Execution plan (90 days): `strategy/90_day_execution_plan.md`
 - Monetization roadmap: `strategy/12_month_monetization_roadmap.md`
