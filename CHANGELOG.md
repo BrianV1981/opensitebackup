@@ -37,6 +37,9 @@
 - `scripts/pre_release_check.sh` as a release gate (syntax + strict preflight + verify + local upload smoke, optional destructive restore drill).
 
 ### Changed
+- `scripts/run_all.sh` now includes strict preflight and explicit stage logging (`pull -> verify -> upload`).
+
+### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
 - Architecture and quickstart docs updated to reflect wrapper + backend-routing model.
 

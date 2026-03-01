@@ -24,6 +24,11 @@ bash scripts/02_verify_backup.sh
 bash scripts/03_upload_to_drive.sh
 ```
 
+One-command variant:
+```bash
+bash scripts/run_all.sh
+```
+
 Optional backend override:
 ```bash
 OSB_BACKEND=local bash scripts/03_upload_to_drive.sh
