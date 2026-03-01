@@ -143,6 +143,7 @@ Backend selection:
 
 ## Documentation
 
+- Docs index (single source map): `docs/DOCS_INDEX.md`
 - Architecture: `docs/architecture.md`
 - Architecture decisions (ADR-style): `docs/architecture_decisions.md`
 - Operator runbook: `docs/runbook.md`
@@ -154,8 +155,10 @@ Backend selection:
 - Handoff checklist: `docs/handoff_checklist.md`
 - Release checklist: `docs/release_checklist.md`
 - Launch readiness tracker: `docs/launch_readiness.md`
+- Go/No-Go guide: `docs/go_no_go.md`
 - Release notes template: `docs/release_notes_template.md`
 - Backend validation matrix: `docs/backend_validation_matrix.md`
+- TUI setup flow spec: `docs/TUI_SETUP_FLOW.md`
 - Execution plan (90 days): `strategy/90_day_execution_plan.md`
 - Monetization roadmap: `strategy/12_month_monetization_roadmap.md`
 

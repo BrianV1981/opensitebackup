@@ -86,6 +86,9 @@
 - Added RC-mode restore enforcement (`OSB_RC_MODE`) in pre-release checks.
 - Added `UPLOAD_VERIFY_SUMMARY` markers for cloud backends (`gog`, `rclone`).
 - Added run-id logging helper (`scripts/log.sh`) and optional JSON logging mode support in core entrypoints.
+- Added onboarding scripts `scripts/session_prep.sh`, `scripts/quick_run.sh`, and Drive bootstrap script `scripts/init_drive_structure.sh`.
+- Session prep now supports non-interactive environments via `OSB_SESSION_PREP_SKIP_SSH_TEST=1` fallback path.
+- Archived red-team directive to `docs/archive/RED_TEAM_FIX_LIST.closed.md` and added `docs/DOCS_INDEX.md` canonical map.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.

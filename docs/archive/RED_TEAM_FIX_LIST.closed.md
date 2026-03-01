@@ -1,5 +1,9 @@
 # OpenSiteBackup — Red Team Fix List (Immediate)
 
+> **Status:** Closed  
+> **Closed in commit:** `7d434e4` (closure baseline), with follow-up hardening through current dev head  
+> **Superseded by:** `docs/runbook.md`, `docs/release_checklist.md`, `docs/architecture.md`, `docs/TUI_SETUP_FLOW.md`
+
 ## Purpose
 Critical hardening and multi-user normalization tasks required to make OpenSiteBackup safe, portable, and non-site-specific.
 

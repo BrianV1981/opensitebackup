@@ -1,7 +1,7 @@
 # OpenSiteBackup — TUI Setup Flow Spec
 
 ## Purpose
-Define a guided, beginner-friendly TUI onboarding flow that reduces setup failures (especially SSH) and enforces all critical hardening requirements from `docs/RED_TEAM_FIX_LIST.md`.
+Define a guided, beginner-friendly TUI onboarding flow that reduces setup failures (especially SSH) and enforces all critical hardening requirements from `docs/archive/RED_TEAM_FIX_LIST.closed.md`.
 
 This spec is implementation-facing and should be treated as a required build checklist.
 
@@ -382,5 +382,5 @@ grep -RInE 'tbsoftwash|localhost:8081|ChangeThisNow_123' scripts adapters backen
 
 ## Handoff note for implementer
 
-Treat this file and `docs/RED_TEAM_FIX_LIST.md` as paired requirements.
+Treat this file and `docs/archive/RED_TEAM_FIX_LIST.closed.md` as paired requirements.
 If conflicts appear, Red Team list priority wins for safety-critical behavior.
