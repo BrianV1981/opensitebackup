@@ -15,6 +15,8 @@ For Google Drive backend, optional structure bootstrap:
 bash scripts/init_drive_structure.sh
 ```
 
+The script prints both a human summary and `export DRIVE_*` lines that can be appended to env files.
+
 Note: when using `gog`, set `DRIVE_ACCOUNT` first (wizard now prompts for it).
 
 Optional docs check:
