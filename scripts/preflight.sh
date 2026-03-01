@@ -46,22 +46,19 @@ if [[ -n "${LIVE_SSH_KEY:-}" && ! -f "${LIVE_SSH_KEY}" ]]; then
   fail=1
 fi
 
-backend="${OSB_BACKEND:-gog}"
+backend="${OSB_BACKEND:-local}"
 echo "BACKEND=$backend"
+if ! bash "$OSB_HOME/scripts/validate_env.sh" upload "$backend" >/dev/null 2>&1; then
+  bash "$OSB_HOME/scripts/validate_env.sh" upload "$backend" || fail=1
+fi
 case "$backend" in
   gog)
     need gog || fail=1
-    require_env DRIVE_ACCOUNT || fail=1
-    require_env DRIVE_DB_FOLDER_ID || fail=1
-    require_env DRIVE_FILES_FOLDER_ID || fail=1
-    require_env DRIVE_MANIFESTS_FOLDER_ID || fail=1
     ;;
   local)
-    # no extra binary required
     ;;
   rclone)
     need rclone || fail=1
-    require_env RCLONE_REMOTE || fail=1
     ;;
   *)
     echo "INVALID ENV: OSB_BACKEND must be one of gog|local|rclone"

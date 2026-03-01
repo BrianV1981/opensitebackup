@@ -6,8 +6,10 @@ OSB_HOME="${OSB_HOME:-$(cd "$SCRIPT_DIR/.." && pwd)}"
 ENV_FILE="${OSB_CONFIG:-$OSB_HOME/config/env.sh}"
 source "$ENV_FILE"
 
-BACKEND="${OSB_BACKEND:-gog}"
+BACKEND="${OSB_BACKEND:-local}"
 BACKEND_SCRIPT="$OSB_HOME/backends/${BACKEND}/upload.sh"
+
+bash "$OSB_HOME/scripts/validate_env.sh" upload "$BACKEND"
 
 if [[ ! -f "$BACKEND_SCRIPT" ]]; then
   echo "Unknown backend: $BACKEND (expected: local|gog|rclone)" >&2
@@ -19,4 +21,4 @@ if [[ ! -x "$BACKEND_SCRIPT" ]]; then
   exit 60
 fi
 
-exec "$BACKEND_SCRIPT"
+exec bash "$OSB_HOME/scripts/with_lock.sh" upload "$BACKEND_SCRIPT"

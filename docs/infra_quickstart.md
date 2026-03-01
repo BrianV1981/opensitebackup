@@ -2,6 +2,10 @@
 
 ## 1) Initialize local config
 ```bash
+# option A: guided wizard
+bash scripts/setup_wizard.sh
+
+# option B: manual
 cp config/env.example config/env.sh
 # edit config/env.sh with your values
 ```
@@ -15,6 +19,7 @@ Strict preflight validates:
 - required binaries (`ssh`, `scp`, `tar`, `wp` + backend tool)
 - selected backend requirements (`OSB_BACKEND`)
 - key env dependencies (e.g., `RCLONE_REMOTE`, Drive folder IDs, optional drive-restore env set)
+- command-context env requirements (via `scripts/validate_env.sh`)
 
 ## 3) Run pipeline
 ```bash
