@@ -162,6 +162,7 @@ Backend selection:
 
 - GitHub Actions CI lints shell scripts across `scripts/`, `adapters/`, and `backends/`
 - CI also runs `bash -n` syntax validation for all runtime shell entrypoints
+- CI enforces anti-hardcoding guard on runtime scripts
 - Local merge gate: `bash scripts/pre_release_check.sh`
 
 ---

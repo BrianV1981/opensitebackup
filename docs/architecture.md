@@ -160,9 +160,9 @@ Contract:
 ## 6) Data model (artifacts)
 
 Naming convention:
-- `tbsoftwash_live_<timestamp>_files.tar.gz`
-- `tbsoftwash_live_<timestamp>_db.sql`
-- `tbsoftwash_live_<timestamp>_sha256.txt`
+- `<site-slug>_live_<timestamp>_files.tar.gz`
+- `<site-slug>_live_<timestamp>_db.sql`
+- `<site-slug>_live_<timestamp>_sha256.txt`
 - `manifest.txt`
 - `local_sha256.txt`
 
@@ -262,7 +262,7 @@ This enables horizontal extension without refactoring core flow.
 
 ## 13) Open questions (for team kickoff)
 
-1. Primary backend default: `rclone` vs `gog` in v1 docs?
+1. Primary backend default: `local` vs `rclone` for first-run UX?
 2. Minimum supported WP host matrix?
 3. Standardized JSON log output needed in v1?
 4. Encrypt artifacts before cloud upload in v1 or v1.1?

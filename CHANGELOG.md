@@ -81,6 +81,7 @@
 - Added command-context env validator (`scripts/validate_env.sh`) enforcement across runtime entrypoints.
 - Added lock-based concurrency protection (`scripts/with_lock.sh`) for backup/upload/restore flows.
 - Added retention cleanup script (`scripts/cleanup_backups.sh`) with dry-run/apply modes.
+- Performed coherence sweep across root/docs to align naming, quality gates, and release checklist with red-team + TUI implementation.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
