@@ -55,7 +55,9 @@ In short: **not just files, full behavior parity from backup snapshot.**
 - Designed for adapter expansion (`rclone`, S3-compatible, etc.)
 
 ## 4) Restore drill workflow
-- Restore from latest backup artifacts
+- Staged restore (extract/import/validate in staging path first)
+- Atomic filesystem swap only after validation passes
+- DB rollback snapshot generated before import
 - URL rewrite for local environment
 - Cache flush + quick validation checks
 

@@ -21,7 +21,7 @@ OSB_BACKEND=local bash scripts/03_upload_to_drive.sh
 echo "[5/5] Optional restore drill"
 if [[ "${RUN_RESTORE_DRILL:-0}" == "1" ]]; then
   echo "RUN_RESTORE_DRILL=1 -> executing drive restore drill"
-  bash scripts/05_restore_from_drive.sh
+  OSB_RESTORE_CONFIRM_REQUIRED=0 bash scripts/05_restore_from_drive.sh
 else
   echo "Skipping restore drill (set RUN_RESTORE_DRILL=1 to include)"
 fi

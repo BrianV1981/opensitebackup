@@ -8,6 +8,7 @@ source "$ENV_FILE"
 
 : "${SOURCE_SITE_SLUG:=site}"
 : "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/${SOURCE_SITE_SLUG}-live}}"
+: "${OSB_RESTORE_CONFIRM_REQUIRED:=1}"
 MODE="${1:-local}"
 
 wp_cmd() {
@@ -16,15 +17,86 @@ wp_cmd() {
 }
 
 repoint_wp_config_from_env() {
-  : "${LOCAL_DB_NAME:?LOCAL_DB_NAME is required for drive restore wp-config rewrite}"
-  : "${LOCAL_DB_USER:?LOCAL_DB_USER is required for drive restore wp-config rewrite}"
-  : "${LOCAL_DB_PASSWORD:?LOCAL_DB_PASSWORD is required for drive restore wp-config rewrite}"
+  : "${LOCAL_DB_NAME:?LOCAL_DB_NAME is required for restore wp-config rewrite}"
+  : "${LOCAL_DB_USER:?LOCAL_DB_USER is required for restore wp-config rewrite}"
+  : "${LOCAL_DB_PASSWORD:?LOCAL_DB_PASSWORD is required for restore wp-config rewrite}"
   : "${LOCAL_DB_HOST:=localhost}"
 
   sed -i "s/define( 'DB_NAME'.*/define( 'DB_NAME', '${LOCAL_DB_NAME}' );/" wp-config.php
   sed -i "s/define( 'DB_USER'.*/define( 'DB_USER', '${LOCAL_DB_USER}' );/" wp-config.php
   sed -i "s/define( 'DB_PASSWORD'.*/define( 'DB_PASSWORD', '${LOCAL_DB_PASSWORD}' );/" wp-config.php
   sed -i "s/define( 'DB_HOST'.*/define( 'DB_HOST', '${LOCAL_DB_HOST}' );/" wp-config.php
+}
+
+apply_rewrites() {
+  if [[ -n "${OSB_REWRITE_FROM_1:-}" && -n "${OSB_REWRITE_TO_1:-}" ]]; then
+    for i in 1 2 3 4 5; do
+      local from_var="OSB_REWRITE_FROM_${i}" to_var="OSB_REWRITE_TO_${i}"
+      local from_val="${!from_var:-}" to_val="${!to_var:-}"
+      [[ -n "$from_val" && -n "$to_val" ]] || continue
+      wp_cmd search-replace "$from_val" "$to_val" --skip-columns=guid || true
+    done
+  fi
+}
+
+validate_staged_restore() {
+  wp_cmd core is-installed >/dev/null
+  local siteurl blogname pages
+  siteurl="$(wp_cmd option get siteurl 2>/dev/null || true)"
+  blogname="$(wp_cmd option get blogname 2>/dev/null || true)"
+  pages="$(wp_cmd post list --post_type=page --format=count 2>/dev/null || echo 0)"
+  [[ -n "$siteurl" ]] || { echo "Validation failed: empty siteurl"; return 1; }
+  [[ -n "$blogname" ]] || { echo "Validation failed: empty blogname"; return 1; }
+  [[ "$pages" =~ ^[0-9]+$ ]] || pages=0
+  (( pages > 0 )) || { echo "Validation failed: page count is 0"; return 1; }
+}
+
+atomic_restore_apply() {
+  local files_tar="$1" db_sql="$2" site_path="$3"
+  local ts stage_path backup_path state_dir db_rollback
+  ts="$(date +%Y%m%d_%H%M%S)"
+  state_dir="${OSB_STATE:-$OSB_HOME/data/state}"
+  stage_path="${site_path}.staging.${ts}"
+  backup_path="${site_path}.prev.${ts}"
+  db_rollback="$state_dir/restore-db-rollback-${SOURCE_SITE_SLUG}-${ts}.sql"
+
+  mkdir -p "$state_dir"
+  mkdir -p "$stage_path"
+
+  echo "[restore] staging extract -> $stage_path"
+  tar -xzf "$files_tar" -C "$stage_path"
+  [[ -f "$stage_path/wp-config.php" ]] || { echo "Restore failed: wp-config.php missing in staging"; return 1; }
+
+  cd "$stage_path"
+  repoint_wp_config_from_env
+
+  echo "[restore] db rollback snapshot -> $db_rollback"
+  wp_cmd db export "$db_rollback" >/dev/null 2>&1 || true
+
+  echo "[restore] import staged db"
+  if ! wp_cmd db import "$db_sql"; then
+    echo "Restore failed during DB import"
+    [[ -f "$db_rollback" ]] && wp_cmd db import "$db_rollback" >/dev/null 2>&1 || true
+    return 1
+  fi
+
+  apply_rewrites
+  wp_cmd cache flush || true
+
+  echo "[restore] validate staged site"
+  if ! validate_staged_restore; then
+    echo "Restore validation failed; attempting DB rollback"
+    [[ -f "$db_rollback" ]] && wp_cmd db import "$db_rollback" >/dev/null 2>&1 || true
+    return 1
+  fi
+
+  echo "[restore] atomic filesystem swap"
+  if [[ -d "$site_path" ]]; then
+    mv "$site_path" "$backup_path"
+  fi
+  mv "$stage_path" "$site_path"
+
+  echo "[restore] swap complete backup_path=$backup_path"
 }
 
 restore_from_local() {
@@ -35,33 +107,16 @@ restore_from_local() {
   latest="$(ls -1dt "$LOCAL_BACKUP_ROOT"/* | head -n1)"
   files_tar="$(ls -1 "$latest"/*_files.tar.gz | head -n1)"
   db_sql="$(ls -1 "$latest"/*_db.sql | head -n1)"
-
   [[ -f "$files_tar" ]] || { echo "Missing files archive: $files_tar"; exit 70; }
   [[ -f "$db_sql" ]] || { echo "Missing db dump: $db_sql"; exit 70; }
 
-  echo "About to restore into: $LOCAL_RESTORE_PATH"
-  read -rp "Type YES to continue: " CONFIRM
-  [[ "$CONFIRM" == "YES" ]] || exit 1
-
-  mkdir -p "$LOCAL_RESTORE_PATH"
-  find "$LOCAL_RESTORE_PATH" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
-
-  tar -xzf "$files_tar" -C "$LOCAL_RESTORE_PATH"
-  [[ -f "$LOCAL_RESTORE_PATH/wp-config.php" ]] || { echo "Restore failed: wp-config.php missing after extract"; exit 70; }
-
-  cd "$LOCAL_RESTORE_PATH"
-  wp_cmd db import "$db_sql"
-  if [[ -n "${OSB_REWRITE_FROM_1:-}" && -n "${OSB_REWRITE_TO_1:-}" ]]; then
-    for i in 1 2 3 4 5; do
-      from_var="OSB_REWRITE_FROM_${i}"
-      to_var="OSB_REWRITE_TO_${i}"
-      from_val="${!from_var:-}"
-      to_val="${!to_var:-}"
-      [[ -n "$from_val" && -n "$to_val" ]] || continue
-      wp_cmd search-replace "$from_val" "$to_val" --skip-columns=guid || true
-    done
+  if [[ "$OSB_RESTORE_CONFIRM_REQUIRED" == "1" ]]; then
+    echo "About to staged-restore into: $LOCAL_RESTORE_PATH"
+    read -rp "Type YES to continue: " CONFIRM
+    [[ "$CONFIRM" == "YES" ]] || exit 1
   fi
-  wp_cmd cache flush || true
+
+  atomic_restore_apply "$files_tar" "$db_sql" "$LOCAL_RESTORE_PATH"
 }
 
 restore_from_drive() {
@@ -77,41 +132,22 @@ restore_from_drive() {
   db_local="$tmp_dir/live_db.sql"
   files_local="$tmp_dir/live_files.tar.gz"
 
-  echo "[1/6] Download DB from Drive..."
+  echo "[1/4] Download DB from Drive..."
   gog drive download "$DRIVE_DB_FILE_ID" --account "$DRIVE_ACCOUNT" --out "$db_local" --no-input
-
-  echo "[2/6] Download files archive from Drive..."
+  echo "[2/4] Download files archive from Drive..."
   gog drive download "$DRIVE_FILES_FILE_ID" --account "$DRIVE_ACCOUNT" --out "$files_local" --no-input
-
   [[ -f "$db_local" ]] || { echo "Missing downloaded DB: $db_local"; exit 70; }
   [[ -f "$files_local" ]] || { echo "Missing downloaded archive: $files_local"; exit 70; }
 
-  echo "[3/6] Prepare target path: $site_path"
-  mkdir -p "$site_path"
-  find "$site_path" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
-
-  echo "[4/6] Extract files..."
-  tar -xzf "$files_local" -C "$site_path"
-  [[ -f "$site_path/wp-config.php" ]] || { echo "Restore failed: wp-config.php missing after extract"; exit 70; }
-
-  cd "$site_path"
-
-  echo "[5/6] Repoint wp-config to local DB credentials from env"
-  repoint_wp_config_from_env
-
-  echo "[6/6] Import DB and rewrite URL"
-  wp_cmd db import "$db_local"
-  if [[ -n "${OSB_REWRITE_FROM_1:-}" && -n "${OSB_REWRITE_TO_1:-}" ]]; then
-    for i in 1 2 3 4 5; do
-      from_var="OSB_REWRITE_FROM_${i}"
-      to_var="OSB_REWRITE_TO_${i}"
-      from_val="${!from_var:-}"
-      to_val="${!to_var:-}"
-      [[ -n "$from_val" && -n "$to_val" ]] || continue
-      wp_cmd search-replace "$from_val" "$to_val" --skip-columns=guid || true
-    done
+  if [[ "$OSB_RESTORE_CONFIRM_REQUIRED" == "1" ]]; then
+    echo "About to staged-restore (drive) into: $site_path"
+    read -rp "Type YES to continue: " CONFIRM
+    [[ "$CONFIRM" == "YES" ]] || exit 1
   fi
-  wp_cmd cache flush || true
+
+  echo "[3/4] Execute staged restore"
+  atomic_restore_apply "$files_local" "$db_local" "$site_path"
+  echo "[4/4] Done"
 }
 
 post_restore_summary() {

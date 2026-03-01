@@ -148,9 +148,10 @@ Contract:
 - Emit IDs/links and duration
 
 ## Step E — Optional restore drill
-- Clear target path with explicit confirmation
-- Extract files
-- Import DB
+- Stage extract/import into temporary site path
+- Create DB rollback snapshot before import
+- Validate staged restore (`wp core is-installed`, siteurl/blogname/pages)
+- Atomic filesystem swap into active path on success
 - URL search-replace
 - post-restore checks
 
