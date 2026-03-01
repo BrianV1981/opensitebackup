@@ -108,7 +108,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/05_restore_from_drive.sh` (wrapper -> `adapters/wordpress/restore.sh drive`)
 - `scripts/preflight.sh`
 - `scripts/lint.sh`
-- `scripts/run_all.sh`
+- `scripts/run_all.sh` (strict preflight -> pull -> verify -> upload)
 - `scripts/collect_restore_metrics.sh`
 - `scripts/demo_restore_run.sh`
 - `scripts/pre_release_check.sh`
