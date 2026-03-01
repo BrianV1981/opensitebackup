@@ -18,6 +18,10 @@
 ### Cleanup
 - Removed temporary internal implementation directive after integrating execution items.
 
+### Added
+- `scripts/collect_restore_metrics.sh` to append restore outcomes to `data/state/restore_metrics.jsonl`.
+- `scripts/demo_restore_run.sh` for a repeatable demo flow (preflight -> drive restore -> checks -> metrics).
+
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
 - Architecture and quickstart docs updated to reflect wrapper + backend-routing model.

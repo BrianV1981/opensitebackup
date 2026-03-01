@@ -30,6 +30,7 @@ Outputs:
 - Verification artifacts
 - Logs
 - Restore evidence
+- Restore metrics (`data/state/restore_metrics.jsonl`)
 ```
 
 ---

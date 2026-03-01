@@ -37,3 +37,10 @@ If using `scripts/05_restore_from_drive.sh`, set local DB rewrite vars in env:
 ```bash
 bash scripts/04_restore_local.sh
 ```
+
+## 5) Demo one-command restore run (optional)
+```bash
+bash scripts/demo_restore_run.sh
+```
+
+This executes preflight -> Drive restore -> post-checks -> metrics append.

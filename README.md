@@ -109,6 +109,8 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/preflight.sh`
 - `scripts/lint.sh`
 - `scripts/run_all.sh`
+- `scripts/collect_restore_metrics.sh`
+- `scripts/demo_restore_run.sh`
 
 Core implementation paths:
 - `adapters/wordpress/`
