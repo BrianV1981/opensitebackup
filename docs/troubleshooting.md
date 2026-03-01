@@ -90,6 +90,15 @@ If warnings become blockers, inspect `wp-config.php` constant definitions and pl
 
 ## Verify stage failures
 
+### No backups found / missing backup directory
+`02_verify_backup.sh` now exits with a clear message and guidance when no backup exists.
+
+Action:
+```bash
+bash scripts/01_pull_live_backup.sh
+bash scripts/02_verify_backup.sh
+```
+
 ### Tar integrity check fails
 Archive may be incomplete/corrupted. Re-run backup pull and verify.
 
