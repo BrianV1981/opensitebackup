@@ -1,0 +1,19 @@
+# Runtime secrets/config
+config/env.sh
+
+# Runtime data (self-contained mode)
+data/backups/
+data/sites/
+data/logs/
+data/tmp/
+data/state/
+
+# Legacy migration leftovers
+legacy/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.git_backup_alt/
