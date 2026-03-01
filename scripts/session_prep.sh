@@ -3,6 +3,14 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OSB_HOME="${OSB_HOME:-$(cd "$SCRIPT_DIR/.." && pwd)}"
+
+if [[ "${1:-}" == "--profile" ]]; then
+  slug="${2:-}"
+  [[ -n "$slug" ]] || { echo "Usage: bash scripts/session_prep.sh [--profile <slug>]"; exit 2; }
+  bash "$OSB_HOME/scripts/use_site_profile.sh" "$slug"
+  shift 2
+fi
+
 ENV_FILE="${OSB_CONFIG:-$OSB_HOME/config/env.sh}"
 source "$ENV_FILE"
 # shellcheck source=/dev/null

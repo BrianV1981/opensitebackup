@@ -18,6 +18,8 @@ bash scripts/init_drive_structure.sh
 Multi-site profile switching:
 ```bash
 bash scripts/use_site_profile.sh <site-slug>
+# or run profile-aware fast path directly
+bash scripts/quick_run.sh --profile <site-slug>
 ```
 
 ## 2) Preflight
