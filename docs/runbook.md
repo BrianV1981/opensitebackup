@@ -88,7 +88,15 @@ Metrics collector output file:
 
 - `data/state/restore_metrics.jsonl`
 
-## 6) Pre-release validation gate
+## 6) Status snapshot
+
+Quick status output:
+
+```bash
+bash scripts/status_snapshot.sh
+```
+
+## 7) Pre-release validation gate
 
 Non-destructive by default:
 
@@ -102,7 +110,7 @@ Include destructive local restore drill when intended:
 RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh
 ```
 
-## 7) Safety rules
+## 8) Safety rules
 
 - Never run destructive restore against live production paths
 - Never commit secrets or runtime artifacts
@@ -110,7 +118,7 @@ RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh
 - Locking is enforced for backup/upload/restore; stale lock handling uses `OSB_LOCK_TIMEOUT_SEC` + `OSB_LOCK_CLEAR_STALE`
 - Logging includes a run identifier (`OSB_RUN_ID`) and supports JSON mode (`OSB_LOG_JSON=1`) for machine parsing
 
-## 8) Retention and cleanup
+## 9) Retention and cleanup
 
 Review retention settings in `config/env.sh`:
 - `OSB_RETENTION_DAILY`
@@ -130,7 +138,7 @@ Apply cleanup:
 bash scripts/cleanup_backups.sh --apply
 ```
 
-## 9) Artifacts to retain per successful run
+## 10) Artifacts to retain per successful run
 
 - `*_files.tar.gz`
 - `*_db.sql`
