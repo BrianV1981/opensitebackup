@@ -99,19 +99,28 @@ bash scripts/05_restore_from_drive.sh
 
 ---
 
-## Runtime scripts (canonical)
+## Runtime scripts (canonical wrappers)
 
-- `scripts/01_pull_live_backup.sh`
-- `scripts/02_verify_backup.sh`
-- `scripts/03_upload_to_drive.sh`
-- `scripts/04_restore_local.sh`
-- `scripts/05_restore_from_drive.sh`
+- `scripts/01_pull_live_backup.sh` (wrapper -> `adapters/wordpress/backup.sh`)
+- `scripts/02_verify_backup.sh` (wrapper -> `adapters/wordpress/verify.sh`)
+- `scripts/03_upload_to_drive.sh` (generic upload entrypoint; routes by `OSB_BACKEND`)
+- `scripts/04_restore_local.sh` (wrapper -> `adapters/wordpress/restore.sh local`)
+- `scripts/05_restore_from_drive.sh` (wrapper -> `adapters/wordpress/restore.sh drive`)
 - `scripts/preflight.sh`
 - `scripts/lint.sh`
 - `scripts/run_all.sh`
 
+Core implementation paths:
+- `adapters/wordpress/`
+- `backends/local/upload.sh`
+- `backends/gog/upload.sh`
+- `backends/rclone/upload.sh` (scaffold)
+
 Config file:
 - `config/env.sh`
+
+Backend selection:
+- `OSB_BACKEND=gog|local|rclone` (default: `gog`)
 
 ---
 

@@ -15,7 +15,13 @@ bash scripts/preflight.sh --strict
 ```bash
 bash scripts/01_pull_live_backup.sh
 bash scripts/02_verify_backup.sh
+# default upload backend is gog
 bash scripts/03_upload_to_drive.sh
+```
+
+Optional backend override:
+```bash
+OSB_BACKEND=local bash scripts/03_upload_to_drive.sh
 ```
 
 ## 4) Restore drill (optional)

@@ -57,17 +57,23 @@ Outputs:
 
 ## 4.1 Orchestrator scripts
 
-- `scripts/run_backup.sh`
-- `scripts/run_verify.sh`
-- `scripts/run_upload.sh`
-- `scripts/run_restore.sh`
+Current canonical operator entrypoints are wrapper scripts:
+- `scripts/01_pull_live_backup.sh`
+- `scripts/02_verify_backup.sh`
+- `scripts/03_upload_to_drive.sh`
+- `scripts/04_restore_local.sh`
+- `scripts/05_restore_from_drive.sh`
 
 Responsibilities:
 - Load env/config
 - Validate preflight conditions
-- Call adapter functions
+- Call adapter/backend functions
 - Emit stage logs
 - Return stable exit code semantics
+
+Upload routing:
+- `scripts/03_upload_to_drive.sh` selects backend from `OSB_BACKEND`
+- Supported values: `gog`, `local`, `rclone` (scaffold)
 
 ## 4.2 Source adapter: WordPress
 
