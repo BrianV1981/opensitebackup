@@ -48,6 +48,10 @@
 - PR template now requires merge-readiness evidence snippets for strict preflight and pre-release gate runs.
 - `gog` and `rclone` upload backends now support bounded retry behavior for transient failures (`OSB_UPLOAD_RETRIES`, `OSB_UPLOAD_RETRY_DELAY_SEC`).
 
+### Added
+- `scripts/backend_matrix_smoke.sh` for Phase 3 backend validation (local/gog/rclone upload smoke with skip-aware logging).
+- `docs/backend_validation_matrix.md` to standardize backend reliability checks and evidence capture.
+
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
 - Architecture and quickstart docs updated to reflect wrapper + backend-routing model.

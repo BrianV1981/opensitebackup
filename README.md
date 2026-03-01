@@ -112,6 +112,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/collect_restore_metrics.sh`
 - `scripts/demo_restore_run.sh`
 - `scripts/pre_release_check.sh`
+- `scripts/backend_matrix_smoke.sh`
 
 Core implementation paths:
 - `adapters/wordpress/`
@@ -142,6 +143,7 @@ Backend selection:
 - Handoff pack: `docs/HANDOFF_PACK.md`
 - Handoff checklist: `docs/handoff_checklist.md`
 - Release checklist: `docs/release_checklist.md`
+- Backend validation matrix: `docs/backend_validation_matrix.md`
 - Execution plan (90 days): `strategy/90_day_execution_plan.md`
 - Monetization roadmap: `strategy/12_month_monetization_roadmap.md`
 
