@@ -60,7 +60,9 @@
 
 ### Added
 - `scripts/release_prepare.sh` to generate `data/state/release_readiness_report.md` with validation evidence.
+- `scripts/generate_launch_packet.sh` to generate `data/state/launch_go_no_go_packet.md` for final release decisions.
 - `docs/launch_readiness.md` for Phase 5 gating and external validation tracking.
+- `docs/go_no_go.md` for formal release decision workflow.
 - `docs/release_notes_template.md` for structured release communication.
 
 ### Changed

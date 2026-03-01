@@ -104,6 +104,7 @@ Receiving lead signature: _____________________
 - Handoff checklist: `./handoff_checklist.md`
 - Release checklist: `./release_checklist.md`
 - Launch readiness tracker: `./launch_readiness.md`
+- Go/No-Go decision guide: `./go_no_go.md`
 - Release notes template: `./release_notes_template.md`
 - 90-day plan: `../strategy/90_day_execution_plan.md`
 - Monetization roadmap: `../strategy/12_month_monetization_roadmap.md`

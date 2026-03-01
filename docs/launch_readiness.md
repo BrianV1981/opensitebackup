@@ -9,8 +9,10 @@ Phase 5 covers operational release confidence, packaging, and communication read
 ## Required gates
 
 - [ ] `bash scripts/release_prepare.sh` passes
+- [ ] `bash scripts/generate_launch_packet.sh` passes
 - [ ] CI green on dev branch
 - [ ] release evidence report generated (`data/state/release_readiness_report.md`)
+- [ ] go/no-go packet generated (`data/state/launch_go_no_go_packet.md`)
 - [ ] release checklist completed (`docs/release_checklist.md`)
 
 ## External validation loop
