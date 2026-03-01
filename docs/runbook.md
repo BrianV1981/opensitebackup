@@ -14,12 +14,25 @@ This runbook is the canonical day-to-day operations guide for OpenSiteBackup.
   - `OSB_UPLOAD_RETRIES`
   - `OSB_UPLOAD_RETRY_DELAY_SEC`
 
-## 2) Preflight
+## 2) Session prep + preflight
 
 ```bash
+bash scripts/session_prep.sh
 bash scripts/preflight.sh --strict
 bash scripts/validate_env.sh backup
 bash scripts/validate_env.sh upload
+```
+
+Fast operator path:
+
+```bash
+bash scripts/quick_run.sh
+```
+
+If your SSH key is passphrase-protected and session prep runs in non-interactive mode, set:
+
+```bash
+OSB_SESSION_PREP_SKIP_SSH_TEST=1 bash scripts/session_prep.sh
 ```
 
 ## 3) Standard backup pipeline

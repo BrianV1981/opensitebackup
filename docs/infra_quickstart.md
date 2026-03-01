@@ -10,6 +10,11 @@ cp config/env.example config/env.sh
 # edit config/env.sh with your values
 ```
 
+For Google Drive backend, optional structure bootstrap:
+```bash
+bash scripts/init_drive_structure.sh
+```
+
 ## 2) Preflight
 ```bash
 bash scripts/preflight.sh --strict

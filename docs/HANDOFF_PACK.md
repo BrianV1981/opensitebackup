@@ -102,6 +102,7 @@ Receiving lead signature: _____________________
 - Troubleshooting: `./troubleshooting.md`
 - Troubleshooting matrix: `./troubleshooting_matrix.md`
 - Handoff checklist: `./handoff_checklist.md`
+- Docs index: `./DOCS_INDEX.md`
 - Release checklist: `./release_checklist.md`
 - Launch readiness tracker: `./launch_readiness.md`
 - Go/No-Go decision guide: `./go_no_go.md`
