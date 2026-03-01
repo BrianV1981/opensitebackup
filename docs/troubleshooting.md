@@ -12,6 +12,15 @@ bash scripts/preflight.sh --strict
 ### `MISSING ENV: ...`
 Populate required variables in `config/env.sh` for the selected backend.
 
+### SSH auth failures (`Permission denied (publickey...)`)
+Run:
+
+```bash
+bash scripts/ssh_troubleshoot.sh
+```
+
+Then apply suggested key permission/auth fixes and rerun `scripts/session_prep.sh`.
+
 ## Upload failures
 
 Cloud backends (`gog`, `rclone`) support bounded retries via:
@@ -80,6 +89,15 @@ Current mitigations:
 If warnings become blockers, inspect `wp-config.php` constant definitions and plugin bootstrap behavior.
 
 ## Verify stage failures
+
+### No backups found / missing backup directory
+`02_verify_backup.sh` now exits with a clear message and guidance when no backup exists.
+
+Action:
+```bash
+bash scripts/01_pull_live_backup.sh
+bash scripts/02_verify_backup.sh
+```
 
 ### Tar integrity check fails
 Archive may be incomplete/corrupted. Re-run backup pull and verify.

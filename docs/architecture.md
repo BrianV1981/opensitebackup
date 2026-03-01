@@ -232,6 +232,10 @@ Must implement:
 
 This enables horizontal extension without refactoring core flow.
 
+Backend neutrality policy:
+- Baseline operation must work without `gog`.
+- `gog` remains optional provider support, not a prerequisite.
+
 ---
 
 ## 11) Test strategy

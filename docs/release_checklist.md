@@ -11,11 +11,12 @@ Use this checklist before promoting `dev` changes to `main`.
 ## 2) Validation gates
 
 - [ ] `bash scripts/preflight.sh --strict`
+- [ ] `bash scripts/doctor.sh`
 - [ ] `bash scripts/pre_release_check.sh`
-- [ ] `bash scripts/backend_matrix_smoke.sh`
+- [ ] `bash scripts/backend_matrix_smoke.sh` (must pass required local backend; optional cloud backend failures are review warnings)
 - [ ] `bash scripts/release_prepare.sh`
 - [ ] `RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh` (required when `OSB_RC_MODE=1`)
-- [ ] CI is green on PR
+- [ ] CI is green on PR (including docs link check + env validation matrix)
 
 ## 3) Artifact/restore confidence
 
@@ -29,7 +30,8 @@ Use this checklist before promoting `dev` changes to `main`.
 - [ ] `CHANGELOG.md` includes all new behavior changes
 - [ ] `docs/architecture.md` aligns with implementation
 - [ ] `docs/runbook.md` and `docs/troubleshooting.md` current
-- [ ] red-team + TUI docs still aligned with runtime (`docs/RED_TEAM_FIX_LIST.md`, `docs/TUI_SETUP_FLOW.md`)
+- [ ] red-team + TUI docs still aligned with runtime (`docs/archive/RED_TEAM_FIX_LIST.closed.md`, `docs/TUI_SETUP_FLOW.md`)
+- [ ] docs index map is current (`docs/DOCS_INDEX.md`)
 - [ ] handoff docs updated (`docs/HANDOFF_PACK.md`, `docs/handoff_checklist.md`)
 
 ## 5) PR quality
@@ -38,6 +40,7 @@ Use this checklist before promoting `dev` changes to `main`.
 - [ ] includes strict preflight evidence
 - [ ] includes pre_release_check evidence
 - [ ] includes launch packet evidence (`data/state/launch_go_no_go_packet.md`)
+- [ ] includes PR evidence bundle (`bash scripts/prepare_pr_evidence.sh` -> `data/state/pr_evidence.md`)
 - [ ] includes rollback notes and known caveats
 
 ## 6) Merge + tagging

@@ -14,11 +14,15 @@ bash scripts/backend_matrix_smoke.sh
 
 ## Backend pass criteria
 
-- `local`: must pass
-- `gog`: pass when tool + required env present
-- `rclone`: pass when tool + `RCLONE_REMOTE` present
+- `local`: must pass (required)
+- `gog`: optional backend; run when tool + required env present
+- `rclone`: optional backend; run when tool + `RCLONE_REMOTE` present
 
 Backends missing tool/env are logged as `SKIP`, not hard failures.
+Optional backend runtime failures are logged as `WARN` and do not fail the matrix when `local` succeeds.
+
+Optional backend execution can be disabled for fast/non-cloud diagnostics:
+- `OSB_MATRIX_INCLUDE_OPTIONAL_BACKENDS=0`
 
 ## Output log
 
