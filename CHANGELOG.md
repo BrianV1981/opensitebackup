@@ -21,6 +21,7 @@
 ### Added
 - `scripts/collect_restore_metrics.sh` to append restore outcomes to `data/state/restore_metrics.jsonl`.
 - `scripts/demo_restore_run.sh` for a repeatable demo flow (preflight -> drive restore -> checks -> metrics).
+- Roadmap strategy doc alignment to current wrapper entrypoints (`scripts/01..05`) and backend-routed upload flow.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
