@@ -18,3 +18,10 @@ jobs:
       - name: Bash syntax checks
         run: |
           bash -n scripts/*.sh adapters/wordpress/*.sh backends/*/upload.sh
+
+      - name: Anti-hardcoding runtime guard
+        run: |
+          if grep -RInE 'tbsoftwash|localhost:8081|ChangeThisNow_123' scripts adapters backends; then
+            echo "Found banned hardcoded runtime token(s)" >&2
+            exit 1
+          fi

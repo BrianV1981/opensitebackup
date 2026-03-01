@@ -19,7 +19,7 @@ files_tar=""
 db_sql=""
 files_size_bytes=0
 db_size_bytes=0
-backup_root="${LOCAL_BACKUP_ROOT:-${OSB_BACKUPS:-$OSB_HOME/data/backups/tbsoftwash-live}}"
+backup_root="${LOCAL_BACKUP_ROOT:-${OSB_BACKUPS:-$OSB_HOME/data/backups/${SOURCE_SITE_SLUG:-site}-live}}"
 if [[ -d "$backup_root" ]]; then
   latest_backup="$(ls -1dt "$backup_root"/* 2>/dev/null | head -n1 || true)"
 fi

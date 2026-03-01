@@ -64,6 +64,16 @@
 - `docs/launch_readiness.md` for Phase 5 gating and external validation tracking.
 - `docs/go_no_go.md` for formal release decision workflow.
 - `docs/release_notes_template.md` for structured release communication.
+- `scripts/validate_env.sh` for strict command-context env validation.
+- `scripts/setup_wizard.sh` guided TUI-style config bootstrap.
+- `scripts/cleanup_backups.sh` for retention policy cleanup (dry-run/apply).
+- `scripts/with_lock.sh` for run-type lock protection.
+
+### Changed
+- Runtime scripts now reject missing required env vars before action (`MISSING ENV: <VAR>`).
+- Upload default backend switched to `local` for backend-neutral fresh installs.
+- Runtime hardcoded site/domain tokens removed in scripts/adapters/backends.
+- CI now fails on banned hardcoded runtime tokens in `scripts/`, `adapters/`, and `backends/`.
 
 ### Fixed
 - Corrected markdown code-fence emission in `scripts/generate_launch_packet.sh` to avoid shell backtick command-substitution errors.

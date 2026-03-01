@@ -18,6 +18,8 @@ This runbook is the canonical day-to-day operations guide for OpenSiteBackup.
 
 ```bash
 bash scripts/preflight.sh --strict
+bash scripts/validate_env.sh backup
+bash scripts/validate_env.sh upload
 ```
 
 ## 3) Standard backup pipeline
@@ -86,7 +88,27 @@ RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh
 - Never commit secrets or runtime artifacts
 - Keep `main` stable; perform active integration on dev branch
 
-## 8) Artifacts to retain per successful run
+## 8) Retention and cleanup
+
+Review retention settings in `config/env.sh`:
+- `OSB_RETENTION_DAILY`
+- `OSB_RETENTION_WEEKLY`
+- `OSB_RETENTION_MONTHLY`
+- `OSB_RETENTION_PRUNE_EMPTY`
+
+Dry-run cleanup:
+
+```bash
+bash scripts/cleanup_backups.sh
+```
+
+Apply cleanup:
+
+```bash
+bash scripts/cleanup_backups.sh --apply
+```
+
+## 9) Artifacts to retain per successful run
 
 - `*_files.tar.gz`
 - `*_db.sql`

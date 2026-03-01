@@ -21,8 +21,8 @@ Cloud backends (`gog`, `rclone`) support bounded retries via:
 ### Unknown backend
 Ensure `OSB_BACKEND` is one of:
 
-- `gog`
 - `local`
+- `gog`
 - `rclone`
 
 ### Backend script not executable
@@ -78,6 +78,15 @@ Archive may be incomplete/corrupted. Re-run backup pull and verify.
 
 ### SQL sanity check fails (`CREATE TABLE` / `INSERT INTO`)
 DB export likely failed/partial. Re-run backup stage and inspect DB dump size/content.
+
+## Lock/concurrency errors
+
+### `LOCKED: <name> (another run is active)`
+A prior run is still executing for the same run type.
+
+Actions:
+- wait for the active run to finish, or
+- inspect lock metadata in `data/state/locks/*.meta`.
 
 ## Final confidence checks
 

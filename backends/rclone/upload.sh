@@ -5,9 +5,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OSB_HOME="${OSB_HOME:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 ENV_FILE="${OSB_CONFIG:-$OSB_HOME/config/env.sh}"
 source "$ENV_FILE"
-: "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/tbsoftwash-live}}"
+: "${SOURCE_SITE_SLUG:=site}"
+: "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/${SOURCE_SITE_SLUG}-live}}"
 
-: "${RCLONE_REMOTE:?RCLONE_REMOTE is required (example: myremote:Backups/WordPress/tbsoftwash.com)}"
+: "${RCLONE_REMOTE:?RCLONE_REMOTE is required (example: myremote:Backups/WordPress/<site-slug>)}"
 RCLONE_FLAGS="${RCLONE_FLAGS:---progress}"
 
 LATEST="$(ls -1dt "$LOCAL_BACKUP_ROOT"/* | head -n1)"

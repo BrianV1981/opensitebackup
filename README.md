@@ -106,9 +106,12 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/03_upload_to_drive.sh` (generic upload entrypoint; routes by `OSB_BACKEND`)
 - `scripts/04_restore_local.sh` (wrapper -> `adapters/wordpress/restore.sh local`)
 - `scripts/05_restore_from_drive.sh` (wrapper -> `adapters/wordpress/restore.sh drive`)
+- `scripts/setup_wizard.sh` (guided env generation)
+- `scripts/validate_env.sh` (command-context env validation)
 - `scripts/preflight.sh`
 - `scripts/lint.sh` (shellcheck across `scripts/`, `adapters/`, `backends/`)
 - `scripts/run_all.sh` (strict preflight -> pull -> verify -> upload)
+- `scripts/cleanup_backups.sh` (retention + empty-dir pruning; dry-run by default)
 - `scripts/collect_restore_metrics.sh`
 - `scripts/demo_restore_run.sh`
 - `scripts/pre_release_check.sh`
@@ -126,7 +129,7 @@ Config file:
 - `config/env.sh`
 
 Backend selection:
-- `OSB_BACKEND=gog|local|rclone` (default: `gog`)
+- `OSB_BACKEND=local|gog|rclone` (default: `local`)
 - `rclone` backend requires `RCLONE_REMOTE` in env (example in `config/env.example`)
 - Upload retry knobs for cloud backends: `OSB_UPLOAD_RETRIES`, `OSB_UPLOAD_RETRY_DELAY_SEC`
 - Drive-restore wp-config rewrite uses env vars (`LOCAL_DB_NAME`, `LOCAL_DB_USER`, `LOCAL_DB_PASSWORD`, `LOCAL_DB_HOST`)

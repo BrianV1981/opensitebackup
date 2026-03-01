@@ -5,7 +5,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 OSB_HOME="${OSB_HOME:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 ENV_FILE="${OSB_CONFIG:-$OSB_HOME/config/env.sh}"
 source "$ENV_FILE"
-: "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/tbsoftwash-live}}"
+: "${SOURCE_SITE_SLUG:=site}"
+: "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/${SOURCE_SITE_SLUG}-live}}"
 
 TS="$(date +%Y%m%d_%H%M%S)"
 RUN_DIR="$LOCAL_BACKUP_ROOT/$TS"
@@ -28,7 +29,7 @@ if [[ -n "${LIVE_SSH_KEY:-}" ]]; then
   SSH_OPTS="-i $LIVE_SSH_KEY $SSH_OPTS"
 fi
 
-REMOTE_PREFIX="tbsoftwash_live_${TS}"
+REMOTE_PREFIX="${SOURCE_SITE_SLUG}_live_${TS}"
 REMOTE_FILES="/home/${LIVE_SSH_USER}/${REMOTE_PREFIX}_files.tar.gz"
 REMOTE_DB="/home/${LIVE_SSH_USER}/${REMOTE_PREFIX}_db.sql"
 REMOTE_SUMS="/home/${LIVE_SSH_USER}/${REMOTE_PREFIX}_sha256.txt"

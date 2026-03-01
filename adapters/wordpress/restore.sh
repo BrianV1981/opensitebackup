@@ -6,7 +6,8 @@ OSB_HOME="${OSB_HOME:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
 ENV_FILE="${OSB_CONFIG:-$OSB_HOME/config/env.sh}"
 source "$ENV_FILE"
 
-: "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/tbsoftwash-live}}"
+: "${SOURCE_SITE_SLUG:=site}"
+: "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/${SOURCE_SITE_SLUG}-live}}"
 MODE="${1:-local}"
 
 wp_cmd() {
@@ -50,7 +51,16 @@ restore_from_local() {
 
   cd "$LOCAL_RESTORE_PATH"
   wp_cmd db import "$db_sql"
-  wp_cmd search-replace 'https://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
+  if [[ -n "${OSB_REWRITE_FROM_1:-}" && -n "${OSB_REWRITE_TO_1:-}" ]]; then
+    for i in 1 2 3 4 5; do
+      from_var="OSB_REWRITE_FROM_${i}"
+      to_var="OSB_REWRITE_TO_${i}"
+      from_val="${!from_var:-}"
+      to_val="${!to_var:-}"
+      [[ -n "$from_val" && -n "$to_val" ]] || continue
+      wp_cmd search-replace "$from_val" "$to_val" --skip-columns=guid || true
+    done
+  fi
   wp_cmd cache flush || true
 }
 
@@ -60,7 +70,7 @@ restore_from_drive() {
   : "${DRIVE_FILES_FILE_ID:?DRIVE_FILES_FILE_ID is required}"
 
   local site_path tmp_dir db_local files_local
-  site_path="${LOCAL_RESTORE_PATH:-$OSB_HOME/data/sites/tbsoftwash.com}"
+  site_path="${LOCAL_RESTORE_PATH:-$OSB_HOME/data/sites/${SOURCE_SITE_SLUG}}"
   tmp_dir="${OSB_TMP:-$OSB_HOME/data/tmp}/restore-from-drive"
   mkdir -p "$tmp_dir"
 
@@ -91,8 +101,16 @@ restore_from_drive() {
 
   echo "[6/6] Import DB and rewrite URL"
   wp_cmd db import "$db_local"
-  wp_cmd search-replace 'https://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
-  wp_cmd search-replace 'http://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
+  if [[ -n "${OSB_REWRITE_FROM_1:-}" && -n "${OSB_REWRITE_TO_1:-}" ]]; then
+    for i in 1 2 3 4 5; do
+      from_var="OSB_REWRITE_FROM_${i}"
+      to_var="OSB_REWRITE_TO_${i}"
+      from_val="${!from_var:-}"
+      to_val="${!to_var:-}"
+      [[ -n "$from_val" && -n "$to_val" ]] || continue
+      wp_cmd search-replace "$from_val" "$to_val" --skip-columns=guid || true
+    done
+  fi
   wp_cmd cache flush || true
 }
 
@@ -114,7 +132,7 @@ case "$MODE" in
     ;;
   drive)
     restore_from_drive
-    cd "${LOCAL_RESTORE_PATH:-$OSB_HOME/data/sites/tbsoftwash.com}"
+    cd "${LOCAL_RESTORE_PATH:-$OSB_HOME/data/sites/${SOURCE_SITE_SLUG}}"
     post_restore_summary
     ;;
   *)
