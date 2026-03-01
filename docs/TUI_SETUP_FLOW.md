@@ -283,7 +283,10 @@ Red-team linkage:
 
 Write:
 - `config/env.sh`
-- optional profile file `config/sites/<site-slug>.env`
+- profile file `config/sites/<site-slug>.env`
+
+Profile switching command:
+- `bash scripts/use_site_profile.sh <site-slug>`
 
 Safety:
 - create timestamped backup if env file exists

@@ -5,6 +5,7 @@ This runbook is the canonical day-to-day operations guide for OpenSiteBackup.
 ## 1) Preconditions
 
 - `config/env.sh` exists and is populated
+- For multi-site mode, profiles can be stored in `config/sites/<slug>.env` and activated via `scripts/use_site_profile.sh <slug>`
 - Required tools installed (`ssh`, `scp`, `tar`, `wp`, plus backend tool)
 - Selected backend env is configured:
   - `OSB_BACKEND=local` -> no extra dependency (recommended first-run)

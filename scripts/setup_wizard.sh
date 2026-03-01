@@ -109,6 +109,9 @@ if [[ "$OSB_BACKEND" == "gog" ]]; then
   fi
 fi
 
+mkdir -p "$OSB_HOME/config/sites"
+cp "$OUT" "$OSB_HOME/config/sites/${SOURCE_SITE_SLUG}.env"
+
 source "$OUT"
 bash "$OSB_HOME/scripts/preflight.sh" --strict
 read -rp "Run first backup now? [y/N]: " run_now || true
