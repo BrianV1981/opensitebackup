@@ -33,7 +33,7 @@ echo "[demo 1/4] Preflight"
 bash "$OSB_HOME/scripts/preflight.sh" --strict
 
 echo "[demo 2/4] Restore from Drive"
-if ! bash "$OSB_HOME/scripts/05_restore_from_drive.sh"; then
+if ! OSB_RESTORE_CONFIRM_REQUIRED=0 bash "$OSB_HOME/scripts/05_restore_from_drive.sh"; then
   restore_error="restore_from_drive_failed"
   exit 1
 fi

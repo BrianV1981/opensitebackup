@@ -61,6 +61,14 @@ For `scripts/05_restore_from_drive.sh`, ensure:
 ### `wp-config.php missing after extract`
 Archive extraction failed or archive is incomplete/corrupted. Re-download/rebuild backup and rerun verify.
 
+### Restore validation failed (staged)
+The staged restore did not pass required checks (siteurl/blogname/page count/core installed).
+
+Actions:
+- inspect staged path and logs
+- verify rewrite mapping vars are correct
+- rerun restore after verifying DB/artifact integrity
+
 ## WP-CLI warning noise during restore
 Some plugin/theme/site config combinations may emit non-fatal warnings during restore/search-replace operations.
 

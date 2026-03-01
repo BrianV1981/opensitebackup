@@ -77,6 +77,10 @@
 
 ### Fixed
 - Corrected markdown code-fence emission in `scripts/generate_launch_packet.sh` to avoid shell backtick command-substitution errors.
+- Restore workflow is now staged+atomic with validation gate and DB rollback snapshot before swap.
+- Added command-context env validator (`scripts/validate_env.sh`) enforcement across runtime entrypoints.
+- Added lock-based concurrency protection (`scripts/with_lock.sh`) for backup/upload/restore flows.
+- Added retention cleanup script (`scripts/cleanup_backups.sh`) with dry-run/apply modes.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.

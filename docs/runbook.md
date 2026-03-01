@@ -46,6 +46,8 @@ bash scripts/04_restore_local.sh
 
 Direct cloud-to-local restore (Drive file IDs):
 
+- uses staged/atomic restore flow and rollback snapshot handling
+
 ```bash
 bash scripts/05_restore_from_drive.sh
 ```
