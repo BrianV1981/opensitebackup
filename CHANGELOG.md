@@ -65,6 +65,9 @@
 - `docs/go_no_go.md` for formal release decision workflow.
 - `docs/release_notes_template.md` for structured release communication.
 
+### Fixed
+- Corrected markdown code-fence emission in `scripts/generate_launch_packet.sh` to avoid shell backtick command-substitution errors.
+
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
 - Architecture and quickstart docs updated to reflect wrapper + backend-routing model.

@@ -41,9 +41,9 @@ fi
   echo "- restore_metrics.jsonl rows: $metrics_rows"
   echo
   echo "## Last restore summary marker"
-  echo "```text"
+  echo '```text'
   echo "$last_restore_summary"
-  echo "```"
+  echo '```'
   echo
   echo "## Backend matrix tail"
   echo "$backend_last"
