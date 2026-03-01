@@ -98,18 +98,7 @@ if [[ "$OSB_BACKEND" == "gog" ]]; then
     source "$OUT"
     init_out="$(bash "$OSB_HOME/scripts/init_drive_structure.sh")"
     echo "$init_out"
-    root_id="$(echo "$init_out" | sed -n 's/.*root=\([^ ]*\).*/\1/p')"
-    db_id="$(echo "$init_out" | sed -n 's/.*db=\([^ ]*\).*/\1/p')"
-    files_id="$(echo "$init_out" | sed -n 's/.*files=\([^ ]*\).*/\1/p')"
-    man_id="$(echo "$init_out" | sed -n 's/.*manifests=\([^ ]*\).*/\1/p')"
-    logs_id="$(echo "$init_out" | sed -n 's/.*logs=\([^ ]*\).*/\1/p')"
-    {
-      echo "export DRIVE_ROOT_FOLDER_ID=\"$root_id\""
-      echo "export DRIVE_DB_FOLDER_ID=\"$db_id\""
-      echo "export DRIVE_FILES_FOLDER_ID=\"$files_id\""
-      echo "export DRIVE_MANIFESTS_FOLDER_ID=\"$man_id\""
-      echo "export DRIVE_LOGS_FOLDER_ID=\"$logs_id\""
-    } >> "$OUT"
+    echo "$init_out" | grep '^export DRIVE_' >> "$OUT"
     echo "Appended Drive folder IDs to $OUT"
   fi
 fi
