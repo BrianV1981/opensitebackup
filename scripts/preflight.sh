@@ -14,9 +14,10 @@ STRICT=0
 
 OSB_HOME="${OSB_HOME:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 ENV_FILE="${OSB_CONFIG:-$OSB_HOME/config/env.sh}"
+# shellcheck source=/dev/null
+source "$OSB_HOME/scripts/log.sh"
 
-echo "OSB_HOME=$OSB_HOME"
-echo "ENV_FILE=$ENV_FILE"
+osb_log INFO "preflight start" "osb_home=$OSB_HOME" "env_file=$ENV_FILE"
 
 need(){ command -v "$1" >/dev/null 2>&1 || { echo "MISSING: $1"; return 1; }; }
 require_env(){
@@ -80,4 +81,8 @@ if [[ $STRICT -eq 1 && $fail -ne 0 ]]; then
   exit 1
 fi
 
-[[ $fail -eq 0 ]] && echo "Preflight OK" || echo "Preflight warnings/errors present"
+if [[ $fail -eq 0 ]]; then
+  osb_log INFO "Preflight OK"
+else
+  osb_log WARN "Preflight warnings/errors present"
+fi

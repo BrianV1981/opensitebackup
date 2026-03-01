@@ -110,6 +110,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/05_restore_from_drive.sh` (wrapper -> `adapters/wordpress/restore.sh drive`)
 - `scripts/setup_wizard.sh` (guided env generation)
 - `scripts/validate_env.sh` (command-context env validation)
+- `scripts/log.sh` (run-id + optional JSON logging helper)
 - `scripts/preflight.sh`
 - `scripts/lint.sh` (shellcheck across `scripts/`, `adapters/`, `backends/`)
 - `scripts/run_all.sh` (strict preflight -> pull -> verify -> upload)

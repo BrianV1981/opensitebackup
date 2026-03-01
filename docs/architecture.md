@@ -48,6 +48,8 @@ Outputs:
 
 4. **Observable execution**
    - Every phase emits explicit stage markers and timestamps.
+   - Run identifier (`OSB_RUN_ID`) is included for traceability.
+   - Optional JSON log mode available via `OSB_LOG_JSON=1`.
 
 5. **Fail loud, fail typed**
    - Distinct failure modes and non-zero exits.
