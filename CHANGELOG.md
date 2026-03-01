@@ -27,6 +27,7 @@
 ### Reliability
 - Demo restore flow now records structured failure metrics on non-success exits.
 - Metrics collector now tolerates missing/non-numeric values safely.
+- Restore/demo/metrics WP-CLI calls now use `--skip-plugins --skip-themes` to reduce warning noise during restore drills.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.

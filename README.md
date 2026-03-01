@@ -126,6 +126,7 @@ Backend selection:
 - `rclone` backend requires `RCLONE_REMOTE` in env (example in `config/env.example`)
 - Drive-restore wp-config rewrite uses env vars (`LOCAL_DB_NAME`, `LOCAL_DB_USER`, `LOCAL_DB_PASSWORD`, `LOCAL_DB_HOST`)
 - `scripts/preflight.sh --strict` now validates backend-specific requirements and key env dependencies before run
+- Restore/demo/metrics WP-CLI calls run in safer mode (`--skip-plugins --skip-themes`) to reduce noisy plugin-side warnings during drills
 
 ---
 

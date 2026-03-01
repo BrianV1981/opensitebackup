@@ -40,10 +40,11 @@ fi
 
 echo "[demo 3/4] Post-restore checks"
 cd "$LOCAL_RESTORE_PATH"
-siteurl="$(wp option get siteurl)"
-blogname="$(wp option get blogname)"
-theme="$(wp option get template)"
-pages="$(wp post list --post_type=page --format=count)"
+WP_SAFE=(wp --skip-plugins --skip-themes)
+siteurl="$(${WP_SAFE[@]} option get siteurl)"
+blogname="$(${WP_SAFE[@]} option get blogname)"
+theme="$(${WP_SAFE[@]} option get template)"
+pages="$(${WP_SAFE[@]} post list --post_type=page --format=count)"
 
 end_ts=$(date +%s)
 restore_duration=$((end_ts-start_ts))
