@@ -9,6 +9,11 @@ source "$ENV_FILE"
 : "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/tbsoftwash-live}}"
 MODE="${1:-local}"
 
+wp_cmd() {
+  WP_CLI_PHP_ARGS="${WP_CLI_PHP_ARGS:-} -d error_reporting=E_ERROR -d display_errors=0" \
+    wp --skip-plugins --skip-themes "$@"
+}
+
 repoint_wp_config_from_env() {
   : "${LOCAL_DB_NAME:?LOCAL_DB_NAME is required for drive restore wp-config rewrite}"
   : "${LOCAL_DB_USER:?LOCAL_DB_USER is required for drive restore wp-config rewrite}"
@@ -44,9 +49,9 @@ restore_from_local() {
   [[ -f "$LOCAL_RESTORE_PATH/wp-config.php" ]] || { echo "Restore failed: wp-config.php missing after extract"; exit 70; }
 
   cd "$LOCAL_RESTORE_PATH"
-  wp db import "$db_sql"
-  wp search-replace 'https://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
-  wp cache flush || true
+  wp_cmd db import "$db_sql"
+  wp_cmd search-replace 'https://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
+  wp_cmd cache flush || true
 }
 
 restore_from_drive() {
@@ -85,17 +90,17 @@ restore_from_drive() {
   repoint_wp_config_from_env
 
   echo "[6/6] Import DB and rewrite URL"
-  wp db import "$db_local"
-  wp search-replace 'https://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
-  wp search-replace 'http://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
-  wp cache flush || true
+  wp_cmd db import "$db_local"
+  wp_cmd search-replace 'https://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
+  wp_cmd search-replace 'http://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
+  wp_cmd cache flush || true
 }
 
 post_restore_summary() {
   local siteurl blogname pages
-  siteurl="$(wp option get siteurl)"
-  blogname="$(wp option get blogname)"
-  pages="$(wp post list --post_type=page --format=count)"
+  siteurl="$(wp_cmd option get siteurl)"
+  blogname="$(wp_cmd option get blogname)"
+  pages="$(wp_cmd post list --post_type=page --format=count)"
   echo "siteurl=$siteurl"
   echo "blogname=$blogname"
   echo "RESTORE_SUMMARY siteurl=$siteurl blogname=$(printf '%q' "$blogname") pages=$pages"

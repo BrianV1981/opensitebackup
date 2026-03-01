@@ -42,10 +42,11 @@ pages="0"
 theme=""
 if [[ -d "$LOCAL_RESTORE_PATH" ]]; then
   cd "$LOCAL_RESTORE_PATH"
-  siteurl="$(wp option get siteurl 2>/dev/null || echo "")"
-  blogname="$(wp option get blogname 2>/dev/null || echo "")"
-  pages="$(wp post list --post_type=page --format=count 2>/dev/null || echo "0")"
-  theme="$(wp option get template 2>/dev/null || echo "")"
+  WP_SAFE=(wp --skip-plugins --skip-themes)
+  siteurl="$(${WP_SAFE[@]} option get siteurl 2>/dev/null || echo "")"
+  blogname="$(${WP_SAFE[@]} option get blogname 2>/dev/null || echo "")"
+  pages="$(${WP_SAFE[@]} post list --post_type=page --format=count 2>/dev/null || echo "0")"
+  theme="$(${WP_SAFE[@]} option get template 2>/dev/null || echo "")"
 fi
 
 [[ "$pages" =~ ^[0-9]+$ ]] || pages=0
