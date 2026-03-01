@@ -14,6 +14,7 @@ Phase 5 covers operational release confidence, packaging, and communication read
 - [ ] release evidence report generated (`data/state/release_readiness_report.md`)
 - [ ] go/no-go packet generated (`data/state/launch_go_no_go_packet.md`)
 - [ ] release checklist completed (`docs/release_checklist.md`)
+- [ ] docs index is current (`docs/DOCS_INDEX.md`)
 
 ## External validation loop
 

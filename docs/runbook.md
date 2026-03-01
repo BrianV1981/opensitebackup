@@ -5,21 +5,39 @@ This runbook is the canonical day-to-day operations guide for OpenSiteBackup.
 ## 1) Preconditions
 
 - `config/env.sh` exists and is populated
+- For multi-site mode, profiles can be stored in `config/sites/<slug>.env` and activated via `scripts/use_site_profile.sh <slug>`
 - Required tools installed (`ssh`, `scp`, `tar`, `wp`, plus backend tool)
 - Selected backend env is configured:
-  - `OSB_BACKEND=gog` -> `DRIVE_ACCOUNT`, `DRIVE_*_FOLDER_ID`
+  - `OSB_BACKEND=local` -> no extra dependency (recommended first-run)
   - `OSB_BACKEND=rclone` -> `RCLONE_REMOTE`
-  - `OSB_BACKEND=local` -> no extra dependency
+  - `OSB_BACKEND=gog` -> `DRIVE_ACCOUNT`, `DRIVE_*_FOLDER_ID` (optional support only)
 - Optional retry tuning for cloud backends (`gog`, `rclone`):
   - `OSB_UPLOAD_RETRIES`
   - `OSB_UPLOAD_RETRY_DELAY_SEC`
 
-## 2) Preflight
+## 2) Session prep + preflight
 
 ```bash
+bash scripts/session_prep.sh
 bash scripts/preflight.sh --strict
 bash scripts/validate_env.sh backup
 bash scripts/validate_env.sh upload
+```
+
+Fast operator path:
+
+```bash
+bash scripts/quick_run.sh
+# profile-aware variant
+bash scripts/quick_run.sh --profile <site-slug>
+```
+
+If quick run fails at backup stage, it now prints a direct SSH-prep hint.
+
+If your SSH key is passphrase-protected and session prep runs in non-interactive mode, set:
+
+```bash
+OSB_SESSION_PREP_SKIP_SSH_TEST=1 bash scripts/session_prep.sh
 ```
 
 ## 3) Standard backup pipeline
@@ -70,12 +88,42 @@ Metrics collector output file:
 
 - `data/state/restore_metrics.jsonl`
 
-## 6) Pre-release validation gate
+## 6) Status snapshot
+
+Quick status output:
+
+```bash
+bash scripts/status_snapshot.sh
+```
+
+Optional docs integrity check:
+
+```bash
+bash scripts/check_docs_links.sh
+```
+
+Non-destructive diagnostics pack:
+
+```bash
+bash scripts/doctor.sh
+```
+
+By default, doctor skips optional cloud backend matrix uploads.
+To include optional backends:
+
+```bash
+OSB_MATRIX_INCLUDE_OPTIONAL_BACKENDS=1 bash scripts/doctor.sh
+```
+
+## 7) Pre-release validation gate
 
 Non-destructive by default:
 
 ```bash
 bash scripts/pre_release_check.sh
+bash scripts/release_prepare.sh
+bash scripts/generate_launch_packet.sh
+bash scripts/prepare_pr_evidence.sh
 ```
 
 Include destructive local restore drill when intended:
@@ -84,7 +132,7 @@ Include destructive local restore drill when intended:
 RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh
 ```
 
-## 7) Safety rules
+## 8) Safety rules
 
 - Never run destructive restore against live production paths
 - Never commit secrets or runtime artifacts
@@ -92,7 +140,7 @@ RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh
 - Locking is enforced for backup/upload/restore; stale lock handling uses `OSB_LOCK_TIMEOUT_SEC` + `OSB_LOCK_CLEAR_STALE`
 - Logging includes a run identifier (`OSB_RUN_ID`) and supports JSON mode (`OSB_LOG_JSON=1`) for machine parsing
 
-## 8) Retention and cleanup
+## 9) Retention and cleanup
 
 Review retention settings in `config/env.sh`:
 - `OSB_RETENTION_DAILY`
@@ -112,7 +160,7 @@ Apply cleanup:
 bash scripts/cleanup_backups.sh --apply
 ```
 
-## 9) Artifacts to retain per successful run
+## 10) Artifacts to retain per successful run
 
 - `*_files.tar.gz`
 - `*_db.sql`

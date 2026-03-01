@@ -109,9 +109,14 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/04_restore_local.sh` (wrapper -> `adapters/wordpress/restore.sh local`)
 - `scripts/05_restore_from_drive.sh` (wrapper -> `adapters/wordpress/restore.sh drive`)
 - `scripts/setup_wizard.sh` (guided env generation)
+- `scripts/use_site_profile.sh` (switch active env from `config/sites/<slug>.env`)
 - `scripts/validate_env.sh` (command-context env validation)
+- `scripts/validate_env_matrix_ci.sh` (CI non-destructive validation matrix)
 - `scripts/log.sh` (run-id + optional JSON logging helper)
 - `scripts/preflight.sh`
+- `scripts/session_prep.sh` (supports `--profile <slug>`)
+- `scripts/ssh_troubleshoot.sh` (SSH diagnostics helper)
+- `scripts/quick_run.sh` (supports `--profile <slug>`)
 - `scripts/lint.sh` (shellcheck across `scripts/`, `adapters/`, `backends/`)
 - `scripts/run_all.sh` (strict preflight -> pull -> verify -> upload)
 - `scripts/cleanup_backups.sh` (retention + empty-dir pruning; dry-run by default)
@@ -121,6 +126,11 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/backend_matrix_smoke.sh`
 - `scripts/release_prepare.sh` (generates release readiness evidence report)
 - `scripts/generate_launch_packet.sh` (generates go/no-go decision packet)
+- `scripts/prepare_pr_evidence.sh` (builds PR-ready evidence markdown)
+- `scripts/status_snapshot.sh` (quick operator status summary)
+- `scripts/doctor.sh` (non-destructive health diagnostics)
+- `scripts/init_drive_structure.sh` (optional Google Drive folder bootstrap)
+- `scripts/check_docs_links.sh` (docs link consistency check)
 
 Core implementation paths:
 - `adapters/wordpress/`
@@ -133,6 +143,7 @@ Config file:
 
 Backend selection:
 - `OSB_BACKEND=local|gog|rclone` (default: `local`)
+- `gog` is supported but optional (not a prerequisite)
 - `rclone` backend requires `RCLONE_REMOTE` in env (example in `config/env.example`)
 - Upload retry knobs for cloud backends: `OSB_UPLOAD_RETRIES`, `OSB_UPLOAD_RETRY_DELAY_SEC`
 - Drive-restore wp-config rewrite uses env vars (`LOCAL_DB_NAME`, `LOCAL_DB_USER`, `LOCAL_DB_PASSWORD`, `LOCAL_DB_HOST`)
@@ -143,6 +154,7 @@ Backend selection:
 
 ## Documentation
 
+- Docs index (single source map): `docs/DOCS_INDEX.md`
 - Architecture: `docs/architecture.md`
 - Architecture decisions (ADR-style): `docs/architecture_decisions.md`
 - Operator runbook: `docs/runbook.md`
@@ -154,8 +166,11 @@ Backend selection:
 - Handoff checklist: `docs/handoff_checklist.md`
 - Release checklist: `docs/release_checklist.md`
 - Launch readiness tracker: `docs/launch_readiness.md`
+- Go/No-Go guide: `docs/go_no_go.md`
 - Release notes template: `docs/release_notes_template.md`
 - Backend validation matrix: `docs/backend_validation_matrix.md`
+- Final evidence summary (dev): `docs/FINAL_EVIDENCE_SUMMARY.md`
+- TUI setup flow spec: `docs/TUI_SETUP_FLOW.md`
 - Execution plan (90 days): `strategy/90_day_execution_plan.md`
 - Monetization roadmap: `strategy/12_month_monetization_roadmap.md`
 

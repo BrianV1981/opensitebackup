@@ -10,6 +10,27 @@ cp config/env.example config/env.sh
 # edit config/env.sh with your values
 ```
 
+For Google Drive backend, optional structure bootstrap:
+```bash
+bash scripts/init_drive_structure.sh
+```
+
+The script prints both a human summary and `export DRIVE_*` lines that can be appended to env files.
+
+Note: when using `gog`, set `DRIVE_ACCOUNT` first (wizard now prompts for it).
+
+Optional docs check:
+```bash
+bash scripts/check_docs_links.sh
+```
+
+Multi-site profile switching:
+```bash
+bash scripts/use_site_profile.sh <site-slug>
+# or run profile-aware fast path directly
+bash scripts/quick_run.sh --profile <site-slug>
+```
+
 ## 2) Preflight
 ```bash
 bash scripts/preflight.sh --strict
