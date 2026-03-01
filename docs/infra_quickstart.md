@@ -15,6 +15,11 @@ For Google Drive backend, optional structure bootstrap:
 bash scripts/init_drive_structure.sh
 ```
 
+Multi-site profile switching:
+```bash
+bash scripts/use_site_profile.sh <site-slug>
+```
+
 ## 2) Preflight
 ```bash
 bash scripts/preflight.sh --strict

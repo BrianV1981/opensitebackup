@@ -109,9 +109,10 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/04_restore_local.sh` (wrapper -> `adapters/wordpress/restore.sh local`)
 - `scripts/05_restore_from_drive.sh` (wrapper -> `adapters/wordpress/restore.sh drive`)
 - `scripts/setup_wizard.sh` (guided env generation)
+- `scripts/use_site_profile.sh` (switch active env from `config/sites/<slug>.env`)
 - `scripts/validate_env.sh` (command-context env validation)
 - `scripts/log.sh` (run-id + optional JSON logging helper)
-- `scripts/preflight.sh`
+- `scripts/preflight.sh
 - `scripts/lint.sh` (shellcheck across `scripts/`, `adapters/`, `backends/`)
 - `scripts/run_all.sh` (strict preflight -> pull -> verify -> upload)
 - `scripts/cleanup_backups.sh` (retention + empty-dir pruning; dry-run by default)
