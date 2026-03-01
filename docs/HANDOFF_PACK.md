@@ -103,6 +103,8 @@ Receiving lead signature: _____________________
 - Troubleshooting matrix: `./troubleshooting_matrix.md`
 - Handoff checklist: `./handoff_checklist.md`
 - Release checklist: `./release_checklist.md`
+- Launch readiness tracker: `./launch_readiness.md`
+- Release notes template: `./release_notes_template.md`
 - 90-day plan: `../strategy/90_day_execution_plan.md`
 - Monetization roadmap: `../strategy/12_month_monetization_roadmap.md`
 - Positioning/GTM: `./positioning_and_gtm.md`

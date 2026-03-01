@@ -113,6 +113,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/demo_restore_run.sh`
 - `scripts/pre_release_check.sh`
 - `scripts/backend_matrix_smoke.sh`
+- `scripts/release_prepare.sh` (generates release readiness evidence report)
 
 Core implementation paths:
 - `adapters/wordpress/`
@@ -145,6 +146,8 @@ Backend selection:
 - Handoff pack: `docs/HANDOFF_PACK.md`
 - Handoff checklist: `docs/handoff_checklist.md`
 - Release checklist: `docs/release_checklist.md`
+- Launch readiness tracker: `docs/launch_readiness.md`
+- Release notes template: `docs/release_notes_template.md`
 - Backend validation matrix: `docs/backend_validation_matrix.md`
 - Execution plan (90 days): `strategy/90_day_execution_plan.md`
 - Monetization roadmap: `strategy/12_month_monetization_roadmap.md`

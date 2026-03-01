@@ -56,6 +56,12 @@
 
 ### Phase status
 - Phase 4 (docs/handoff quality) closed with runbook + troubleshooting + architecture decisions + troubleshooting matrix + release checklist coverage.
+- Phase 5 launch-readiness execution started with release evidence automation and launch-tracking docs.
+
+### Added
+- `scripts/release_prepare.sh` to generate `data/state/release_readiness_report.md` with validation evidence.
+- `docs/launch_readiness.md` for Phase 5 gating and external validation tracking.
+- `docs/release_notes_template.md` for structured release communication.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
