@@ -121,8 +121,9 @@ Contract:
 ## 5) Runtime sequence (backup to upload)
 
 ## Step A — Preflight
-- Validate tools present (`ssh`, `tar`, `wp`, backend tool)
-- Validate config values
+- Validate tools present (`ssh`, `scp`, `tar`, `wp`, backend tool)
+- Validate config values and backend selection (`OSB_BACKEND`)
+- Validate backend-specific env requirements (`DRIVE_*` or `RCLONE_REMOTE`)
 - Validate SSH key path and permissions
 - Validate source host reachability and WP path
 

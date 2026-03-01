@@ -11,6 +11,11 @@ cp config/env.example config/env.sh
 bash scripts/preflight.sh --strict
 ```
 
+Strict preflight validates:
+- required binaries (`ssh`, `scp`, `tar`, `wp` + backend tool)
+- selected backend requirements (`OSB_BACKEND`)
+- key env dependencies (e.g., `RCLONE_REMOTE`, Drive folder IDs, optional drive-restore env set)
+
 ## 3) Run pipeline
 ```bash
 bash scripts/01_pull_live_backup.sh
