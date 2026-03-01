@@ -221,6 +221,7 @@ opensitebackup/
 ### Work items
 - Public repo hardening
 - CI checks for shell/docs examples
+- Release validation automation (`release_prepare` + matrix smoke)
 - Release tag `v0.1.0`
 - Launch materials (demo video + comparison table)
 
@@ -228,10 +229,12 @@ opensitebackup/
 - First OSS release
 - Changelog + roadmap
 - Issue templates for bugs/features
+- Launch readiness tracker + release notes template
 
 ### Acceptance criteria
 - 3 external users can complete backup/verify/upload flow
 - At least 1 external successful restore report
+- Release readiness report generated and attached to release PR
 
 ---
 
