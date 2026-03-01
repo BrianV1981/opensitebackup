@@ -96,6 +96,12 @@ Quick status output:
 bash scripts/status_snapshot.sh
 ```
 
+Optional docs integrity check:
+
+```bash
+bash scripts/check_docs_links.sh
+```
+
 ## 7) Pre-release validation gate
 
 Non-destructive by default:

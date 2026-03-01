@@ -1,6 +1,6 @@
 # OpenSiteBackup Docs Index
 
-Last reviewed: 2026-03-01
+Last reviewed: 2026-03-01 (deep coherence sweep)
 
 ## Active canonical docs
 
@@ -37,10 +37,12 @@ Last reviewed: 2026-03-01
 |---|---|
 | `docs/archive/RED_TEAM_FIX_LIST.closed.md` | red-team closure artifact preserved for audit trail |
 
-## Reference docs (contextual)
+## Reference docs (contextual / legacy-specific)
 
 - `docs/reference/tbsoftwash-ops/COMPREHENSIVE_BACKUP_RUNBOOK.md`
 - `docs/reference/tbsoftwash-ops/OPERATIONS_RUNBOOK.md`
+
+These are preserved as historical domain-specific references and are not canonical for generic first-run onboarding.
 
 ## Strategy docs
 

@@ -95,6 +95,7 @@
 - Added CI env-validation matrix script (`scripts/validate_env_matrix_ci.sh`) and workflow gate.
 - Added profile-aware onboarding fast paths (`scripts/session_prep.sh --profile`, `scripts/quick_run.sh --profile`).
 - Added `docs/FINAL_EVIDENCE_SUMMARY.md` to consolidate red-team closure + gate evidence for reviewer handoff.
+- Deep docs coherence sweep: aligned README/runtime list with actual scripts, clarified legacy reference-doc role, and synced runbook/quickstart operator checks.
 - Verify flow now handles empty/missing backup state gracefully with clear first-run guidance (instead of raw `ls` failure).
 - Setup wizard now prompts for `DRIVE_ACCOUNT` when `gog` backend is selected and can auto-wire Drive init IDs.
 - Quick run now emits a clear stage-specific SSH guidance hint when backup auth fails.

@@ -17,6 +17,11 @@ bash scripts/init_drive_structure.sh
 
 Note: when using `gog`, set `DRIVE_ACCOUNT` first (wizard now prompts for it).
 
+Optional docs check:
+```bash
+bash scripts/check_docs_links.sh
+```
+
 Multi-site profile switching:
 ```bash
 bash scripts/use_site_profile.sh <site-slug>
