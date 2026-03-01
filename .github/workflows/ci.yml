@@ -29,3 +29,7 @@ jobs:
       - name: Docs link consistency check
         run: |
           bash scripts/check_docs_links.sh
+
+      - name: Env validation matrix (non-destructive)
+        run: |
+          bash scripts/validate_env_matrix_ci.sh

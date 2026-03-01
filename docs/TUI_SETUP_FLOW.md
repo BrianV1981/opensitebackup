@@ -369,6 +369,7 @@ grep -RInE 'example|localhost:8081|hardcoded-pass' scripts adapters backends && 
 ```
 
 2. Add dry-run env validation job for each command context.
+   - implemented via `scripts/validate_env_matrix_ci.sh` in CI.
 
 ---
 

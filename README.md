@@ -111,6 +111,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/setup_wizard.sh` (guided env generation)
 - `scripts/use_site_profile.sh` (switch active env from `config/sites/<slug>.env`)
 - `scripts/validate_env.sh` (command-context env validation)
+- `scripts/validate_env_matrix_ci.sh` (CI non-destructive validation matrix)
 - `scripts/log.sh` (run-id + optional JSON logging helper)
 - `scripts/preflight.sh`
 - `scripts/session_prep.sh`
