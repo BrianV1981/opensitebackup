@@ -98,6 +98,7 @@
 - Deep docs coherence sweep: aligned README/runtime list with actual scripts, clarified legacy reference-doc role, and synced runbook/quickstart operator checks.
 - Added `scripts/doctor.sh` non-destructive diagnostics bundle and linked it in runbook/release checklist.
 - Backend matrix now hard-fails only on required `local` backend; optional cloud backend failures are surfaced as warnings.
+- Added `OSB_MATRIX_INCLUDE_OPTIONAL_BACKENDS` control (default `0` in env example) so doctor/matrix can avoid cloud uploads unless explicitly enabled.
 - Verify flow now handles empty/missing backup state gracefully with clear first-run guidance (instead of raw `ls` failure).
 - Setup wizard now prompts for `DRIVE_ACCOUNT` when `gog` backend is selected and can auto-wire Drive init IDs.
 - Quick run now emits a clear stage-specific SSH guidance hint when backup auth fails.

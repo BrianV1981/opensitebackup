@@ -29,6 +29,6 @@ else
 fi
 
 echo "[doctor 6/6] backend matrix smoke"
-bash "$OSB_HOME/scripts/backend_matrix_smoke.sh"
+OSB_MATRIX_INCLUDE_OPTIONAL_BACKENDS="${OSB_MATRIX_INCLUDE_OPTIONAL_BACKENDS:-0}" bash "$OSB_HOME/scripts/backend_matrix_smoke.sh"
 
 echo "DOCTOR: OK"

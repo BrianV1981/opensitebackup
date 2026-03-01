@@ -108,6 +108,13 @@ Non-destructive diagnostics pack:
 bash scripts/doctor.sh
 ```
 
+By default, doctor skips optional cloud backend matrix uploads.
+To include optional backends:
+
+```bash
+OSB_MATRIX_INCLUDE_OPTIONAL_BACKENDS=1 bash scripts/doctor.sh
+```
+
 ## 7) Pre-release validation gate
 
 Non-destructive by default:
