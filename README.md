@@ -114,9 +114,9 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/validate_env_matrix_ci.sh` (CI non-destructive validation matrix)
 - `scripts/log.sh` (run-id + optional JSON logging helper)
 - `scripts/preflight.sh`
-- `scripts/session_prep.sh`
+- `scripts/session_prep.sh` (supports `--profile <slug>`)
 - `scripts/ssh_troubleshoot.sh` (SSH diagnostics helper)
-- `scripts/quick_run.sh`
+- `scripts/quick_run.sh` (supports `--profile <slug>`)
 - `scripts/lint.sh` (shellcheck across `scripts/`, `adapters/`, `backends/`)
 - `scripts/run_all.sh` (strict preflight -> pull -> verify -> upload)
 - `scripts/cleanup_backups.sh` (retention + empty-dir pruning; dry-run by default)

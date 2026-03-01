@@ -28,6 +28,8 @@ Fast operator path:
 
 ```bash
 bash scripts/quick_run.sh
+# profile-aware variant
+bash scripts/quick_run.sh --profile <site-slug>
 ```
 
 If your SSH key is passphrase-protected and session prep runs in non-interactive mode, set:
