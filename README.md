@@ -112,7 +112,10 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/use_site_profile.sh` (switch active env from `config/sites/<slug>.env`)
 - `scripts/validate_env.sh` (command-context env validation)
 - `scripts/log.sh` (run-id + optional JSON logging helper)
-- `scripts/preflight.sh
+- `scripts/preflight.sh`
+- `scripts/session_prep.sh`
+- `scripts/ssh_troubleshoot.sh` (SSH diagnostics helper)
+- `scripts/quick_run.sh`
 - `scripts/lint.sh` (shellcheck across `scripts/`, `adapters/`, `backends/`)
 - `scripts/run_all.sh` (strict preflight -> pull -> verify -> upload)
 - `scripts/cleanup_backups.sh` (retention + empty-dir pruning; dry-run by default)

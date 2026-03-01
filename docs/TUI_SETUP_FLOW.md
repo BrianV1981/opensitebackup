@@ -317,7 +317,7 @@ If yes:
 
 - `scripts/setup_wizard.sh`
 - `scripts/validate_env.sh`
-- `scripts/ssh_troubleshoot.sh` (helper optional)
+- `scripts/ssh_troubleshoot.sh` (helper)
 
 Update runtime scripts to call `validate_env.sh` by command context:
 - backup
