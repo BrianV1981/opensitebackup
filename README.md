@@ -47,3 +47,17 @@ Config file:
 
 Legacy/site-specific scripts were moved to:
 - `legacy/tbsoftwash-ops/`
+
+
+## Quick start
+```bash
+cp config/env.example config/env.sh
+bash scripts/preflight.sh --strict
+bash scripts/01_pull_live_backup.sh
+bash scripts/02_verify_backup.sh
+bash scripts/03_upload_to_drive.sh
+```
+
+## Documentation hard rule
+Documentation must be updated whenever behavior/scripts change.
+See `docs/documentation_policy.md`.
