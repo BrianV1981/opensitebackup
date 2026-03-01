@@ -29,6 +29,7 @@ Use this checklist before promoting `dev` changes to `main`.
 - [ ] `CHANGELOG.md` includes all new behavior changes
 - [ ] `docs/architecture.md` aligns with implementation
 - [ ] `docs/runbook.md` and `docs/troubleshooting.md` current
+- [ ] red-team + TUI docs still aligned with runtime (`docs/RED_TEAM_FIX_LIST.md`, `docs/TUI_SETUP_FLOW.md`)
 - [ ] handoff docs updated (`docs/HANDOFF_PACK.md`, `docs/handoff_checklist.md`)
 
 ## 5) PR quality
