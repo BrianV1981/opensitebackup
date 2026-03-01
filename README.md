@@ -140,6 +140,7 @@ Backend selection:
 - Infra quickstart: `docs/infra_quickstart.md`
 - Handoff pack: `docs/HANDOFF_PACK.md`
 - Handoff checklist: `docs/handoff_checklist.md`
+- Release checklist: `docs/release_checklist.md`
 - Execution plan (90 days): `strategy/90_day_execution_plan.md`
 - Monetization roadmap: `strategy/12_month_monetization_roadmap.md`
 
