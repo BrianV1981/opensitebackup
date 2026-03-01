@@ -13,7 +13,7 @@ Use this checklist before promoting `dev` changes to `main`.
 - [ ] `bash scripts/preflight.sh --strict`
 - [ ] `bash scripts/doctor.sh`
 - [ ] `bash scripts/pre_release_check.sh`
-- [ ] `bash scripts/backend_matrix_smoke.sh`
+- [ ] `bash scripts/backend_matrix_smoke.sh` (must pass required local backend; optional cloud backend failures are review warnings)
 - [ ] `bash scripts/release_prepare.sh`
 - [ ] `RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh` (required when `OSB_RC_MODE=1`)
 - [ ] CI is green on PR (including docs link check + env validation matrix)
