@@ -133,6 +133,7 @@ Config file:
 
 Backend selection:
 - `OSB_BACKEND=local|gog|rclone` (default: `local`)
+- `gog` is supported but optional (not a prerequisite)
 - `rclone` backend requires `RCLONE_REMOTE` in env (example in `config/env.example`)
 - Upload retry knobs for cloud backends: `OSB_UPLOAD_RETRIES`, `OSB_UPLOAD_RETRY_DELAY_SEC`
 - Drive-restore wp-config rewrite uses env vars (`LOCAL_DB_NAME`, `LOCAL_DB_USER`, `LOCAL_DB_PASSWORD`, `LOCAL_DB_HOST`)

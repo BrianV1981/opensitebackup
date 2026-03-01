@@ -7,9 +7,9 @@ This runbook is the canonical day-to-day operations guide for OpenSiteBackup.
 - `config/env.sh` exists and is populated
 - Required tools installed (`ssh`, `scp`, `tar`, `wp`, plus backend tool)
 - Selected backend env is configured:
-  - `OSB_BACKEND=gog` -> `DRIVE_ACCOUNT`, `DRIVE_*_FOLDER_ID`
+  - `OSB_BACKEND=local` -> no extra dependency (recommended first-run)
   - `OSB_BACKEND=rclone` -> `RCLONE_REMOTE`
-  - `OSB_BACKEND=local` -> no extra dependency
+  - `OSB_BACKEND=gog` -> `DRIVE_ACCOUNT`, `DRIVE_*_FOLDER_ID` (optional support only)
 - Optional retry tuning for cloud backends (`gog`, `rclone`):
   - `OSB_UPLOAD_RETRIES`
   - `OSB_UPLOAD_RETRY_DELAY_SEC`
