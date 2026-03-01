@@ -11,6 +11,7 @@ Use this checklist before promoting `dev` changes to `main`.
 ## 2) Validation gates
 
 - [ ] `bash scripts/preflight.sh --strict`
+- [ ] `bash scripts/doctor.sh`
 - [ ] `bash scripts/pre_release_check.sh`
 - [ ] `bash scripts/backend_matrix_smoke.sh`
 - [ ] `bash scripts/release_prepare.sh`
