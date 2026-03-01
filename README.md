@@ -116,7 +116,7 @@ Core implementation paths:
 - `adapters/wordpress/`
 - `backends/local/upload.sh`
 - `backends/gog/upload.sh`
-- `backends/rclone/upload.sh` (scaffold)
+- `backends/rclone/upload.sh`
 
 Config file:
 - `config/env.sh`

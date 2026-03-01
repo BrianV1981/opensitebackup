@@ -35,6 +35,7 @@ It defines what to read, what artifacts must be present, and how to sign off tha
 - [ ] Successful restore drill log
 - [ ] Manifest sample (`manifest.txt`)
 - [ ] Checksum sample (`local_sha256.txt`)
+- [ ] Restore metrics sample (`data/state/restore_metrics.jsonl`)
 
 ## Configuration package
 - [ ] Environment template (no secrets)

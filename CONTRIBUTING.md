@@ -6,10 +6,13 @@ Thanks for contributing to OpenSiteBackup.
 1. Fork and create a branch: `feat/<name>` or `fix/<name>`
 2. Make small, focused commits
 3. Run checks locally:
-   - `bash scripts/preflight.sh --help`
+   - `bash scripts/preflight.sh --strict`
    - `bash scripts/lint.sh`
-4. Update docs for behavior changes (hard rule)
-5. Open PR with:
+4. If restore/upload paths changed, run targeted smoke checks:
+   - `OSB_BACKEND=local bash scripts/03_upload_to_drive.sh`
+   - `bash scripts/05_restore_from_drive.sh` (destructive local drill; optional by scope)
+5. Update docs for behavior changes (hard rule)
+6. Open PR with:
    - problem statement
    - change summary
    - test evidence

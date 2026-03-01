@@ -29,6 +29,10 @@
 - Metrics collector now tolerates missing/non-numeric values safely.
 - Restore/demo/metrics WP-CLI calls now use `--skip-plugins --skip-themes` to reduce warning noise during restore drills.
 
+### Docs
+- Synced root + `docs/` handoff/runbook/contributing docs with current architecture and execution flow.
+- Removed stale `rclone` scaffold wording and aligned operational checklists with backend/env requirements.
+
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
 - Architecture and quickstart docs updated to reflect wrapper + backend-routing model.

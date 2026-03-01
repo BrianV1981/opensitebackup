@@ -200,6 +200,11 @@ bash 03_upload_to_drive.sh
 bash 04_restore_local.sh
 ```
 
+5) (Optional) Demo restore run + metrics
+```bash
+bash demo_restore_run.sh
+```
+
 Success criteria:
 - No script errors
 - Manifest + checksum files present
