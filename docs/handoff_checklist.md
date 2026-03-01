@@ -32,7 +32,10 @@ Use this checklist when transferring execution to another engineering team.
 - [ ] `strategy/12_month_monetization_roadmap.md` reviewed
 - [ ] `docs/architecture.md` reviewed
 - [ ] `docs/positioning_and_gtm.md` reviewed
-- [ ] Runbook(s) linked and accessible
+- [ ] `docs/runbook.md` reviewed
+- [ ] `docs/troubleshooting.md` reviewed
+- [ ] `docs/architecture_decisions.md` reviewed
+- [ ] `docs/troubleshooting_matrix.md` reviewed
 
 ---
 
@@ -73,11 +76,13 @@ Use this checklist when transferring execution to another engineering team.
 - [ ] Backend abstraction implemented
 - [ ] At least one cloud backend working
 - [ ] Upload logs include timestamps and durations
+- [ ] Backend selection validated via `OSB_BACKEND` (`gog|local|rclone`)
 
 ### Restore
 - [ ] Local restore script implemented
 - [ ] URL rewrite step documented
 - [ ] Post-restore health checks documented
+- [ ] Drive restore env requirements documented (`LOCAL_DB_NAME`, `LOCAL_DB_USER`, `LOCAL_DB_PASSWORD`, optional `LOCAL_DB_HOST`)
 
 ---
 
@@ -88,6 +93,7 @@ Use this checklist when transferring execution to another engineering team.
 - [ ] One successful upload log attached
 - [ ] One successful restore drill log attached
 - [ ] Artifact sample set available (or secure references)
+- [ ] One restore metrics sample row attached (`data/state/restore_metrics.jsonl`)
 
 ---
 

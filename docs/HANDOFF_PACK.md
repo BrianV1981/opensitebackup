@@ -11,10 +11,14 @@ It defines what to read, what artifacts must be present, and how to sign off tha
 
 1. `README.md`
 2. `docs/architecture.md`
-3. `strategy/90_day_execution_plan.md`
-4. `strategy/12_month_monetization_roadmap.md`
-5. `docs/positioning_and_gtm.md`
-6. `docs/handoff_checklist.md`
+3. `docs/architecture_decisions.md`
+4. `docs/runbook.md`
+5. `docs/troubleshooting.md`
+6. `docs/troubleshooting_matrix.md`
+7. `strategy/90_day_execution_plan.md`
+8. `strategy/12_month_monetization_roadmap.md`
+9. `docs/positioning_and_gtm.md`
+10. `docs/handoff_checklist.md`
 
 ---
 
@@ -35,6 +39,7 @@ It defines what to read, what artifacts must be present, and how to sign off tha
 - [ ] Successful restore drill log
 - [ ] Manifest sample (`manifest.txt`)
 - [ ] Checksum sample (`local_sha256.txt`)
+- [ ] Restore metrics sample (`data/state/restore_metrics.jsonl`)
 
 ## Configuration package
 - [ ] Environment template (no secrets)
@@ -92,7 +97,15 @@ Receiving lead signature: _____________________
 
 - Root README: `../README.md`
 - Architecture: `./architecture.md`
+- Architecture decisions: `./architecture_decisions.md`
+- Runbook: `./runbook.md`
+- Troubleshooting: `./troubleshooting.md`
+- Troubleshooting matrix: `./troubleshooting_matrix.md`
 - Handoff checklist: `./handoff_checklist.md`
+- Release checklist: `./release_checklist.md`
+- Launch readiness tracker: `./launch_readiness.md`
+- Go/No-Go decision guide: `./go_no_go.md`
+- Release notes template: `./release_notes_template.md`
 - 90-day plan: `../strategy/90_day_execution_plan.md`
 - Monetization roadmap: `../strategy/12_month_monetization_roadmap.md`
 - Positioning/GTM: `./positioning_and_gtm.md`

@@ -55,7 +55,9 @@ In short: **not just files, full behavior parity from backup snapshot.**
 - Designed for adapter expansion (`rclone`, S3-compatible, etc.)
 
 ## 4) Restore drill workflow
-- Restore from latest backup artifacts
+- Staged restore (extract/import/validate in staging path first)
+- Atomic filesystem swap only after validation passes
+- DB rollback snapshot generated before import
 - URL rewrite for local environment
 - Cache flush + quick validation checks
 
@@ -99,31 +101,70 @@ bash scripts/05_restore_from_drive.sh
 
 ---
 
-## Runtime scripts (canonical)
+## Runtime scripts (canonical wrappers)
 
-- `scripts/01_pull_live_backup.sh`
-- `scripts/02_verify_backup.sh`
-- `scripts/03_upload_to_drive.sh`
-- `scripts/04_restore_local.sh`
-- `scripts/05_restore_from_drive.sh`
+- `scripts/01_pull_live_backup.sh` (wrapper -> `adapters/wordpress/backup.sh`)
+- `scripts/02_verify_backup.sh` (wrapper -> `adapters/wordpress/verify.sh`)
+- `scripts/03_upload_to_drive.sh` (generic upload entrypoint; routes by `OSB_BACKEND`)
+- `scripts/04_restore_local.sh` (wrapper -> `adapters/wordpress/restore.sh local`)
+- `scripts/05_restore_from_drive.sh` (wrapper -> `adapters/wordpress/restore.sh drive`)
+- `scripts/setup_wizard.sh` (guided env generation)
+- `scripts/validate_env.sh` (command-context env validation)
+- `scripts/log.sh` (run-id + optional JSON logging helper)
 - `scripts/preflight.sh`
-- `scripts/lint.sh`
-- `scripts/run_all.sh`
+- `scripts/lint.sh` (shellcheck across `scripts/`, `adapters/`, `backends/`)
+- `scripts/run_all.sh` (strict preflight -> pull -> verify -> upload)
+- `scripts/cleanup_backups.sh` (retention + empty-dir pruning; dry-run by default)
+- `scripts/collect_restore_metrics.sh`
+- `scripts/demo_restore_run.sh`
+- `scripts/pre_release_check.sh`
+- `scripts/backend_matrix_smoke.sh`
+- `scripts/release_prepare.sh` (generates release readiness evidence report)
+- `scripts/generate_launch_packet.sh` (generates go/no-go decision packet)
+
+Core implementation paths:
+- `adapters/wordpress/`
+- `backends/local/upload.sh`
+- `backends/gog/upload.sh`
+- `backends/rclone/upload.sh`
 
 Config file:
 - `config/env.sh`
+
+Backend selection:
+- `OSB_BACKEND=local|gog|rclone` (default: `local`)
+- `rclone` backend requires `RCLONE_REMOTE` in env (example in `config/env.example`)
+- Upload retry knobs for cloud backends: `OSB_UPLOAD_RETRIES`, `OSB_UPLOAD_RETRY_DELAY_SEC`
+- Drive-restore wp-config rewrite uses env vars (`LOCAL_DB_NAME`, `LOCAL_DB_USER`, `LOCAL_DB_PASSWORD`, `LOCAL_DB_HOST`)
+- `scripts/preflight.sh --strict` now validates backend-specific requirements and key env dependencies before run
+- Restore/demo/metrics WP-CLI calls run in safer mode (`--skip-plugins --skip-themes`) to reduce noisy plugin-side warnings during drills
 
 ---
 
 ## Documentation
 
 - Architecture: `docs/architecture.md`
+- Architecture decisions (ADR-style): `docs/architecture_decisions.md`
+- Operator runbook: `docs/runbook.md`
+- Troubleshooting: `docs/troubleshooting.md`
+- Troubleshooting matrix: `docs/troubleshooting_matrix.md`
 - Self-contained mode: `docs/self_contained_mode.md`
 - Infra quickstart: `docs/infra_quickstart.md`
 - Handoff pack: `docs/HANDOFF_PACK.md`
 - Handoff checklist: `docs/handoff_checklist.md`
+- Release checklist: `docs/release_checklist.md`
+- Launch readiness tracker: `docs/launch_readiness.md`
+- Release notes template: `docs/release_notes_template.md`
+- Backend validation matrix: `docs/backend_validation_matrix.md`
 - Execution plan (90 days): `strategy/90_day_execution_plan.md`
 - Monetization roadmap: `strategy/12_month_monetization_roadmap.md`
+
+## CI / Quality gates
+
+- GitHub Actions CI lints shell scripts across `scripts/`, `adapters/`, and `backends/`
+- CI also runs `bash -n` syntax validation for all runtime shell entrypoints
+- CI enforces anti-hardcoding guard on runtime scripts
+- Local merge gate: `bash scripts/pre_release_check.sh`
 
 ---
 

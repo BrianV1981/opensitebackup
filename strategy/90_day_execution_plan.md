@@ -84,10 +84,11 @@ opensitebackup/
       upload.sh
   scripts/
     bootstrap.sh
-    run_backup.sh
-    run_verify.sh
-    run_upload.sh
-    run_restore.sh
+    01_pull_live_backup.sh
+    02_verify_backup.sh
+    03_upload_to_drive.sh
+    04_restore_local.sh
+    05_restore_from_drive.sh
   docs/
     architecture.md
     runbook.md
@@ -132,7 +133,7 @@ opensitebackup/
 
 ### Deliverables
 - `adapters/wordpress/backup.sh`
-- `scripts/run_backup.sh`
+- `scripts/01_pull_live_backup.sh` (wrapper entrypoint)
 - Integration test script for dry-run and live-run checks
 
 ### Acceptance criteria
@@ -159,8 +160,8 @@ opensitebackup/
 ### Deliverables
 - `adapters/wordpress/verify.sh`
 - `adapters/wordpress/restore.sh`
-- `scripts/run_verify.sh`
-- `scripts/run_restore.sh`
+- `scripts/02_verify_backup.sh` (wrapper entrypoint)
+- `scripts/04_restore_local.sh` / `scripts/05_restore_from_drive.sh` (wrapper entrypoints)
 
 ### Acceptance criteria
 - Restore drill passes on local WSL target
@@ -182,7 +183,7 @@ opensitebackup/
 - `backends/local/upload.sh`
 - `backends/rclone/upload.sh`
 - `backends/gog/upload.sh` (optional)
-- `scripts/run_upload.sh`
+- `scripts/03_upload_to_drive.sh` (generic backend-routed upload entrypoint)
 
 ### Acceptance criteria
 - Same backup can upload with backend switch only (no core changes)
@@ -209,6 +210,8 @@ opensitebackup/
 ### Acceptance criteria
 - New engineer can run first backup from docs only
 - New operator can run restore drill from docs only
+- Architecture decisions are documented (`docs/architecture_decisions.md`)
+- Troubleshooting matrix is documented (`docs/troubleshooting_matrix.md`)
 - All scripts have usage blocks and examples
 
 ---
@@ -218,6 +221,7 @@ opensitebackup/
 ### Work items
 - Public repo hardening
 - CI checks for shell/docs examples
+- Release validation automation (`release_prepare` + matrix smoke)
 - Release tag `v0.1.0`
 - Launch materials (demo video + comparison table)
 
@@ -225,10 +229,12 @@ opensitebackup/
 - First OSS release
 - Changelog + roadmap
 - Issue templates for bugs/features
+- Launch readiness tracker + release notes template
 
 ### Acceptance criteria
 - 3 external users can complete backup/verify/upload flow
 - At least 1 external successful restore report
+- Release readiness report generated and attached to release PR
 
 ---
 

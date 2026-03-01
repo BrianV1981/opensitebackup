@@ -8,8 +8,12 @@ Any change to scripts, config shape, or runtime flow MUST include doc updates in
 ## Minimum docs to review on each change
 - `README.md`
 - `docs/architecture.md`
+- `docs/runbook.md`
+- `docs/troubleshooting.md`
 - `docs/self_contained_mode.md`
 - `docs/handoff_checklist.md` (if process changed)
+- `docs/release_checklist.md` (if release/promotion process changed)
+- `docs/TUI_SETUP_FLOW.md` and `docs/RED_TEAM_FIX_LIST.md` (when onboarding/safety model changes)
 
 ## Periodic review cadence
 - Weekly: quick doc drift scan
