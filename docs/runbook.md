@@ -121,6 +121,9 @@ Non-destructive by default:
 
 ```bash
 bash scripts/pre_release_check.sh
+bash scripts/release_prepare.sh
+bash scripts/generate_launch_packet.sh
+bash scripts/prepare_pr_evidence.sh
 ```
 
 Include destructive local restore drill when intended:
