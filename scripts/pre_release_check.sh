@@ -19,6 +19,11 @@ echo "[4/5] Local backend upload smoke"
 OSB_BACKEND=local bash scripts/03_upload_to_drive.sh
 
 echo "[5/5] Optional restore drill"
+if [[ "${OSB_RC_MODE:-0}" == "1" && "${RUN_RESTORE_DRILL:-0}" != "1" ]]; then
+  echo "RC_MODE requires restore drill. Set RUN_RESTORE_DRILL=1"
+  exit 1
+fi
+
 if [[ "${RUN_RESTORE_DRILL:-0}" == "1" ]]; then
   echo "RUN_RESTORE_DRILL=1 -> executing drive restore drill"
   OSB_RESTORE_CONFIRM_REQUIRED=0 bash scripts/05_restore_from_drive.sh

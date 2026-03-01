@@ -16,6 +16,24 @@ shift || true
 
 lockfile="$LOCK_DIR/${name}.lock"
 meta="$LOCK_DIR/${name}.meta"
+: "${OSB_LOCK_TIMEOUT_SEC:=600}"
+
+if [[ -f "$meta" ]]; then
+  started_epoch="$(stat -c %Y "$meta" 2>/dev/null || echo 0)"
+  now_epoch="$(date +%s)"
+  age=$((now_epoch-started_epoch))
+  if (( age > OSB_LOCK_TIMEOUT_SEC )); then
+    echo "STALE_LOCK_DETECTED: $name age=${age}s timeout=${OSB_LOCK_TIMEOUT_SEC}s"
+    if [[ "${OSB_LOCK_CLEAR_STALE:-0}" == "1" ]]; then
+      echo "Clearing stale lock automatically (OSB_LOCK_CLEAR_STALE=1)"
+      rm -f "$lockfile" "$meta"
+    else
+      read -rp "Clear stale lock and continue? type YES: " ans
+      [[ "$ans" == "YES" ]] || { echo "Aborted due to stale lock"; exit 99; }
+      rm -f "$lockfile" "$meta"
+    fi
+  fi
+fi
 
 exec 9>"$lockfile"
 if ! flock -n 9; then

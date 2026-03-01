@@ -39,6 +39,8 @@ Cloud backend retries are governed by:
 - `OSB_UPLOAD_RETRIES`
 - `OSB_UPLOAD_RETRY_DELAY_SEC`
 
+Upload step emits `UPLOAD_VERIFY_SUMMARY` markers after successful backend operations.
+
 ## Recommended cadence
 
 - Run before any dev->main promotion
