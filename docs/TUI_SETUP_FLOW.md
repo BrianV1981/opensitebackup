@@ -369,6 +369,7 @@ grep -RInE 'tbsoftwash|localhost:8081|ChangeThisNow_123' scripts adapters backen
 ```
 
 2. Add dry-run env validation job for each command context.
+   - implemented via `scripts/validate_env_matrix_ci.sh` in CI.
 
 ---
 

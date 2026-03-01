@@ -15,7 +15,7 @@ Use this checklist before promoting `dev` changes to `main`.
 - [ ] `bash scripts/backend_matrix_smoke.sh`
 - [ ] `bash scripts/release_prepare.sh`
 - [ ] `RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh` (required when `OSB_RC_MODE=1`)
-- [ ] CI is green on PR
+- [ ] CI is green on PR (including docs link check + env validation matrix)
 
 ## 3) Artifact/restore confidence
 

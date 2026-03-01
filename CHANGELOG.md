@@ -92,6 +92,7 @@
 - Session prep now supports non-interactive environments via `OSB_SESSION_PREP_SKIP_SSH_TEST=1` fallback path.
 - Archived red-team directive to `docs/archive/RED_TEAM_FIX_LIST.closed.md` and added `docs/DOCS_INDEX.md` canonical map.
 - Clarified docs and runbook language that `gog` is optional support, not a prerequisite backend.
+- Added CI env-validation matrix script (`scripts/validate_env_matrix_ci.sh`) and workflow gate.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
