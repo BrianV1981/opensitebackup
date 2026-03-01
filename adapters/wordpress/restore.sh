@@ -9,7 +9,22 @@ source "$ENV_FILE"
 : "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/tbsoftwash-live}}"
 MODE="${1:-local}"
 
+repoint_wp_config_from_env() {
+  : "${LOCAL_DB_NAME:?LOCAL_DB_NAME is required for drive restore wp-config rewrite}"
+  : "${LOCAL_DB_USER:?LOCAL_DB_USER is required for drive restore wp-config rewrite}"
+  : "${LOCAL_DB_PASSWORD:?LOCAL_DB_PASSWORD is required for drive restore wp-config rewrite}"
+  : "${LOCAL_DB_HOST:=localhost}"
+
+  sed -i "s/define( 'DB_NAME'.*/define( 'DB_NAME', '${LOCAL_DB_NAME}' );/" wp-config.php
+  sed -i "s/define( 'DB_USER'.*/define( 'DB_USER', '${LOCAL_DB_USER}' );/" wp-config.php
+  sed -i "s/define( 'DB_PASSWORD'.*/define( 'DB_PASSWORD', '${LOCAL_DB_PASSWORD}' );/" wp-config.php
+  sed -i "s/define( 'DB_HOST'.*/define( 'DB_HOST', '${LOCAL_DB_HOST}' );/" wp-config.php
+}
+
 restore_from_local() {
+  : "${LOCAL_RESTORE_PATH:?LOCAL_RESTORE_PATH is required}"
+  : "${LOCAL_URL:?LOCAL_URL is required}"
+
   local latest files_tar db_sql
   latest="$(ls -1dt "$LOCAL_BACKUP_ROOT"/* | head -n1)"
   files_tar="$(ls -1 "$latest"/*_files.tar.gz | head -n1)"
@@ -66,16 +81,13 @@ restore_from_drive() {
 
   cd "$site_path"
 
-  echo "[5/6] Repoint wp-config to local DB credentials"
-  sed -i "s/define( 'DB_NAME'.*/define( 'DB_NAME', 'tbsoftwash_wp' );/" wp-config.php
-  sed -i "s/define( 'DB_USER'.*/define( 'DB_USER', 'tbsoftwash_user' );/" wp-config.php
-  sed -i "s/define( 'DB_PASSWORD'.*/define( 'DB_PASSWORD', 'ChangeThisNow_123!' );/" wp-config.php
-  sed -i "s/define( 'DB_HOST'.*/define( 'DB_HOST', 'localhost' );/" wp-config.php
+  echo "[5/6] Repoint wp-config to local DB credentials from env"
+  repoint_wp_config_from_env
 
   echo "[6/6] Import DB and rewrite URL"
   wp db import "$db_local"
-  wp search-replace 'https://tbsoftwash.com' 'http://localhost:8081' --skip-columns=guid || true
-  wp search-replace 'http://tbsoftwash.com' 'http://localhost:8081' --skip-columns=guid || true
+  wp search-replace 'https://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
+  wp search-replace 'http://tbsoftwash.com' "$LOCAL_URL" --skip-columns=guid || true
   wp cache flush || true
 }
 

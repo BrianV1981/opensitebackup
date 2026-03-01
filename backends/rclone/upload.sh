@@ -1,5 +1,40 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "TODO: rclone backend not implemented yet."
-exit 60
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+OSB_HOME="${OSB_HOME:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+ENV_FILE="${OSB_CONFIG:-$OSB_HOME/config/env.sh}"
+source "$ENV_FILE"
+: "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/tbsoftwash-live}}"
+
+: "${RCLONE_REMOTE:?RCLONE_REMOTE is required (example: myremote:Backups/WordPress/tbsoftwash.com)}"
+RCLONE_FLAGS="${RCLONE_FLAGS:---progress}"
+
+LATEST="$(ls -1dt "$LOCAL_BACKUP_ROOT"/* | head -n1)"
+FILES_TAR="$(ls -1 "$LATEST"/*_files.tar.gz | head -n1)"
+DB_SQL="$(ls -1 "$LATEST"/*_db.sql | head -n1)"
+MANIFEST="$LATEST/manifest.txt"
+LOCALSUMS="$LATEST/local_sha256.txt"
+
+[[ -f "$MANIFEST" ]] || { echo "Run 02_verify_backup.sh first"; exit 1; }
+
+upload_with_log() {
+  local file="$1"
+  local subdir="$2"
+  local label="$3"
+  local size start end dur
+  size=$(du -h "$file" | awk '{print $1}')
+  start=$(date +%s)
+  echo "[$(date -Is)] START upload: $label | $(basename "$file") | size=$size"
+  rclone copy "$file" "${RCLONE_REMOTE}/${subdir}" $RCLONE_FLAGS
+  end=$(date +%s)
+  dur=$((end-start))
+  echo "[$(date -Is)] DONE  upload: $label | duration=${dur}s"
+}
+
+upload_with_log "$DB_SQL" "db" "database"
+upload_with_log "$FILES_TAR" "files" "files-archive"
+upload_with_log "$MANIFEST" "manifests" "manifest"
+upload_with_log "$LOCALSUMS" "manifests" "checksums"
+
+echo "Uploaded latest backup set via rclone to $RCLONE_REMOTE"

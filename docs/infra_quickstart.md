@@ -22,7 +22,16 @@ bash scripts/03_upload_to_drive.sh
 Optional backend override:
 ```bash
 OSB_BACKEND=local bash scripts/03_upload_to_drive.sh
+OSB_BACKEND=rclone bash scripts/03_upload_to_drive.sh
 ```
+
+If using `rclone`, set `RCLONE_REMOTE` in `config/env.sh` first.
+
+If using `scripts/05_restore_from_drive.sh`, set local DB rewrite vars in env:
+- `LOCAL_DB_NAME`
+- `LOCAL_DB_USER`
+- `LOCAL_DB_PASSWORD`
+- `LOCAL_DB_HOST` (optional, defaults to `localhost`)
 
 ## 4) Restore drill (optional)
 ```bash
