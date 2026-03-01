@@ -37,6 +37,10 @@ OSB_BACKEND=rclone bash scripts/03_upload_to_drive.sh
 
 If using `rclone`, set `RCLONE_REMOTE` in `config/env.sh` first.
 
+Optional upload retry knobs (gog/rclone):
+- `OSB_UPLOAD_RETRIES`
+- `OSB_UPLOAD_RETRY_DELAY_SEC`
+
 If using `scripts/05_restore_from_drive.sh`, set local DB rewrite vars in env:
 - `LOCAL_DB_NAME`
 - `LOCAL_DB_USER`

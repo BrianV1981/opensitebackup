@@ -10,6 +10,9 @@ This runbook is the canonical day-to-day operations guide for OpenSiteBackup.
   - `OSB_BACKEND=gog` -> `DRIVE_ACCOUNT`, `DRIVE_*_FOLDER_ID`
   - `OSB_BACKEND=rclone` -> `RCLONE_REMOTE`
   - `OSB_BACKEND=local` -> no extra dependency
+- Optional retry tuning for cloud backends (`gog`, `rclone`):
+  - `OSB_UPLOAD_RETRIES`
+  - `OSB_UPLOAD_RETRY_DELAY_SEC`
 
 ## 2) Preflight
 

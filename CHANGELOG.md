@@ -46,6 +46,7 @@
 - `scripts/run_all.sh` now includes strict preflight and explicit stage logging (`pull -> verify -> upload`).
 - CI now lint-checks shell scripts across `scripts/`, `adapters/`, and `backends/` and runs `bash -n` syntax checks.
 - PR template now requires merge-readiness evidence snippets for strict preflight and pre-release gate runs.
+- `gog` and `rclone` upload backends now support bounded retry behavior for transient failures (`OSB_UPLOAD_RETRIES`, `OSB_UPLOAD_RETRY_DELAY_SEC`).
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.

@@ -144,6 +144,7 @@ Contract:
 ## Step D — Upload
 - Select backend
 - Upload files + DB + manifest + checksums
+- Apply bounded retry policy for transient backend failures (`OSB_UPLOAD_RETRIES`, `OSB_UPLOAD_RETRY_DELAY_SEC`)
 - Emit IDs/links and duration
 
 ## Step E — Optional restore drill
