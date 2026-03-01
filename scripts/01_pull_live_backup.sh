@@ -7,7 +7,20 @@ source "$ENV_FILE"
 : "${LOCAL_BACKUP_ROOT:=${OSB_BACKUPS:-$OSB_HOME/data/backups/tbsoftwash-live}}"
 
 TS="$(date +%Y%m%d_%H%M%S)"
-mkdir -p "$LOCAL_BACKUP_ROOT/$TS"
+RUN_DIR="$LOCAL_BACKUP_ROOT/$TS"
+mkdir -p "$RUN_DIR"
+
+cleanup_on_error() {
+  local code=$?
+  if [[ $code -ne 0 ]]; then
+    if [[ -d "$RUN_DIR" ]] && [[ -z "$(find "$RUN_DIR" -mindepth 1 -maxdepth 1 -print -quit 2>/dev/null)" ]]; then
+      rmdir "$RUN_DIR" 2>/dev/null || true
+      echo "[$(date -Is)] Cleanup: removed empty failed run dir $RUN_DIR"
+    fi
+  fi
+  exit $code
+}
+trap cleanup_on_error EXIT
 
 SSH_OPTS="-o IdentitiesOnly=yes -o PreferredAuthentications=publickey"
 if [[ -n "${LIVE_SSH_KEY:-}" ]]; then
@@ -48,13 +61,14 @@ ls -lh "${REMOTE_FILES}" "${REMOTE_DB}" "${REMOTE_SUMS}"
 EOF
 
 echo "[$(date -Is)] [2/5] Downloading files archive ..."
-scp $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_FILES}" "$LOCAL_BACKUP_ROOT/$TS/"
+scp $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_FILES}" "$RUN_DIR/"
 echo "[$(date -Is)] [3/5] Downloading database dump ..."
-scp $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_DB}" "$LOCAL_BACKUP_ROOT/$TS/"
+scp $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_DB}" "$RUN_DIR/"
 echo "[$(date -Is)] [4/5] Downloading checksum manifest ..."
-scp $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_SUMS}" "$LOCAL_BACKUP_ROOT/$TS/"
+scp $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_SUMS}" "$RUN_DIR/"
 
 echo "[$(date -Is)] [5/5] Cleaning remote temp files ..."
 ssh $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}" "rm -f '${REMOTE_FILES}' '${REMOTE_DB}' '${REMOTE_SUMS}'"
 
-echo "Pulled backup into: $LOCAL_BACKUP_ROOT/$TS"
+trap - EXIT
+echo "Pulled backup into: $RUN_DIR"
