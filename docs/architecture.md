@@ -30,6 +30,7 @@ Outputs:
 - Verification artifacts
 - Logs
 - Restore evidence
+- Restore metrics (`data/state/restore_metrics.jsonl`)
 ```
 
 ---
@@ -47,6 +48,8 @@ Outputs:
 
 4. **Observable execution**
    - Every phase emits explicit stage markers and timestamps.
+   - Run identifier (`OSB_RUN_ID`) is included for traceability.
+   - Optional JSON log mode available via `OSB_LOG_JSON=1`.
 
 5. **Fail loud, fail typed**
    - Distinct failure modes and non-zero exits.
@@ -57,17 +60,23 @@ Outputs:
 
 ## 4.1 Orchestrator scripts
 
-- `scripts/run_backup.sh`
-- `scripts/run_verify.sh`
-- `scripts/run_upload.sh`
-- `scripts/run_restore.sh`
+Current canonical operator entrypoints are wrapper scripts:
+- `scripts/01_pull_live_backup.sh`
+- `scripts/02_verify_backup.sh`
+- `scripts/03_upload_to_drive.sh`
+- `scripts/04_restore_local.sh`
+- `scripts/05_restore_from_drive.sh`
 
 Responsibilities:
 - Load env/config
 - Validate preflight conditions
-- Call adapter functions
+- Call adapter/backend functions
 - Emit stage logs
 - Return stable exit code semantics
+
+Upload routing:
+- `scripts/03_upload_to_drive.sh` selects backend from `OSB_BACKEND`
+- Supported values: `gog`, `local`, `rclone`
 
 ## 4.2 Source adapter: WordPress
 
@@ -114,8 +123,9 @@ Contract:
 ## 5) Runtime sequence (backup to upload)
 
 ## Step A — Preflight
-- Validate tools present (`ssh`, `tar`, `wp`, backend tool)
-- Validate config values
+- Validate tools present (`ssh`, `scp`, `tar`, `wp`, backend tool)
+- Validate config values and backend selection (`OSB_BACKEND`)
+- Validate backend-specific env requirements (`DRIVE_*` or `RCLONE_REMOTE`)
 - Validate SSH key path and permissions
 - Validate source host reachability and WP path
 
@@ -136,12 +146,14 @@ Contract:
 ## Step D — Upload
 - Select backend
 - Upload files + DB + manifest + checksums
+- Apply bounded retry policy for transient backend failures (`OSB_UPLOAD_RETRIES`, `OSB_UPLOAD_RETRY_DELAY_SEC`)
 - Emit IDs/links and duration
 
 ## Step E — Optional restore drill
-- Clear target path with explicit confirmation
-- Extract files
-- Import DB
+- Stage extract/import into temporary site path
+- Create DB rollback snapshot before import
+- Validate staged restore (`wp core is-installed`, siteurl/blogname/pages)
+- Atomic filesystem swap into active path on success
 - URL search-replace
 - post-restore checks
 
@@ -150,9 +162,9 @@ Contract:
 ## 6) Data model (artifacts)
 
 Naming convention:
-- `tbsoftwash_live_<timestamp>_files.tar.gz`
-- `tbsoftwash_live_<timestamp>_db.sql`
-- `tbsoftwash_live_<timestamp>_sha256.txt`
+- `<site-slug>_live_<timestamp>_files.tar.gz`
+- `<site-slug>_live_<timestamp>_db.sql`
+- `<site-slug>_live_<timestamp>_sha256.txt`
 - `manifest.txt`
 - `local_sha256.txt`
 
@@ -252,7 +264,7 @@ This enables horizontal extension without refactoring core flow.
 
 ## 13) Open questions (for team kickoff)
 
-1. Primary backend default: `rclone` vs `gog` in v1 docs?
+1. Primary backend default: `local` vs `rclone` for first-run UX?
 2. Minimum supported WP host matrix?
 3. Standardized JSON log output needed in v1?
 4. Encrypt artifacts before cloud upload in v1 or v1.1?

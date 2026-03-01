@@ -12,11 +12,13 @@ Create full, restorable backups of the live WordPress site:
 - `gog` authenticated locally
 
 ## Procedure
-1. Configure `scripts/env.sh`
-2. `bash scripts/01_pull_live_backup.sh`
-3. `bash scripts/02_verify_backup.sh`
-4. `bash scripts/03_upload_to_drive.sh`
-5. Optional DR test: `bash scripts/04_restore_local.sh`
+1. Configure `scripts/env.sh` / `config/env.sh`
+2. `bash scripts/preflight.sh --strict`
+3. `bash scripts/01_pull_live_backup.sh`
+4. `bash scripts/02_verify_backup.sh`
+5. `bash scripts/03_upload_to_drive.sh` (or `OSB_BACKEND=local|rclone` override)
+6. Optional DR test: `bash scripts/04_restore_local.sh`
+7. Optional demo drill: `bash scripts/demo_restore_run.sh`
 
 ## Retention Policy (recommended)
 - Keep daily backups: 7 days
