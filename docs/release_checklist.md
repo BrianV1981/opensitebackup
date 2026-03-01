@@ -36,6 +36,7 @@ Use this checklist before promoting `dev` changes to `main`.
 - [ ] PR uses updated template sections
 - [ ] includes strict preflight evidence
 - [ ] includes pre_release_check evidence
+- [ ] includes launch packet evidence (`data/state/launch_go_no_go_packet.md`)
 - [ ] includes rollback notes and known caveats
 
 ## 6) Merge + tagging

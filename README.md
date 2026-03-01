@@ -114,6 +114,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/pre_release_check.sh`
 - `scripts/backend_matrix_smoke.sh`
 - `scripts/release_prepare.sh` (generates release readiness evidence report)
+- `scripts/generate_launch_packet.sh` (generates go/no-go decision packet)
 
 Core implementation paths:
 - `adapters/wordpress/`
