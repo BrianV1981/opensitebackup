@@ -84,10 +84,11 @@ opensitebackup/
       upload.sh
   scripts/
     bootstrap.sh
-    run_backup.sh
-    run_verify.sh
-    run_upload.sh
-    run_restore.sh
+    01_pull_live_backup.sh
+    02_verify_backup.sh
+    03_upload_to_drive.sh
+    04_restore_local.sh
+    05_restore_from_drive.sh
   docs/
     architecture.md
     runbook.md
@@ -132,7 +133,7 @@ opensitebackup/
 
 ### Deliverables
 - `adapters/wordpress/backup.sh`
-- `scripts/run_backup.sh`
+- `scripts/01_pull_live_backup.sh` (wrapper entrypoint)
 - Integration test script for dry-run and live-run checks
 
 ### Acceptance criteria
@@ -159,8 +160,8 @@ opensitebackup/
 ### Deliverables
 - `adapters/wordpress/verify.sh`
 - `adapters/wordpress/restore.sh`
-- `scripts/run_verify.sh`
-- `scripts/run_restore.sh`
+- `scripts/02_verify_backup.sh` (wrapper entrypoint)
+- `scripts/04_restore_local.sh` / `scripts/05_restore_from_drive.sh` (wrapper entrypoints)
 
 ### Acceptance criteria
 - Restore drill passes on local WSL target
@@ -182,7 +183,7 @@ opensitebackup/
 - `backends/local/upload.sh`
 - `backends/rclone/upload.sh`
 - `backends/gog/upload.sh` (optional)
-- `scripts/run_upload.sh`
+- `scripts/03_upload_to_drive.sh` (generic backend-routed upload entrypoint)
 
 ### Acceptance criteria
 - Same backup can upload with backend switch only (no core changes)
