@@ -74,7 +74,7 @@ Responsibilities:
 
 Upload routing:
 - `scripts/03_upload_to_drive.sh` selects backend from `OSB_BACKEND`
-- Supported values: `gog`, `local`, `rclone` (scaffold)
+- Supported values: `gog`, `local`, `rclone`
 
 ## 4.2 Source adapter: WordPress
 
