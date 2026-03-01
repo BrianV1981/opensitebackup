@@ -32,7 +32,8 @@ Use this checklist when transferring execution to another engineering team.
 - [ ] `strategy/12_month_monetization_roadmap.md` reviewed
 - [ ] `docs/architecture.md` reviewed
 - [ ] `docs/positioning_and_gtm.md` reviewed
-- [ ] Runbook(s) linked and accessible
+- [ ] `docs/runbook.md` reviewed
+- [ ] `docs/troubleshooting.md` reviewed
 
 ---
 

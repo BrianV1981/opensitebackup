@@ -11,10 +11,12 @@ It defines what to read, what artifacts must be present, and how to sign off tha
 
 1. `README.md`
 2. `docs/architecture.md`
-3. `strategy/90_day_execution_plan.md`
-4. `strategy/12_month_monetization_roadmap.md`
-5. `docs/positioning_and_gtm.md`
-6. `docs/handoff_checklist.md`
+3. `docs/runbook.md`
+4. `docs/troubleshooting.md`
+5. `strategy/90_day_execution_plan.md`
+6. `strategy/12_month_monetization_roadmap.md`
+7. `docs/positioning_and_gtm.md`
+8. `docs/handoff_checklist.md`
 
 ---
 
