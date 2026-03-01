@@ -33,6 +33,9 @@
 - Synced root + `docs/` handoff/runbook/contributing docs with current architecture and execution flow.
 - Removed stale `rclone` scaffold wording and aligned operational checklists with backend/env requirements.
 
+### Added
+- `scripts/pre_release_check.sh` as a release gate (syntax + strict preflight + verify + local upload smoke, optional destructive restore drill).
+
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
 - Architecture and quickstart docs updated to reflect wrapper + backend-routing model.

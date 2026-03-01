@@ -49,3 +49,10 @@ bash scripts/demo_restore_run.sh
 ```
 
 This executes preflight -> Drive restore -> post-checks -> metrics append.
+
+## 6) Pre-release gate (recommended)
+```bash
+bash scripts/pre_release_check.sh
+# include destructive restore drill only when explicitly intended:
+RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh
+```
