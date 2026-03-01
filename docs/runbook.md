@@ -102,6 +102,12 @@ Optional docs integrity check:
 bash scripts/check_docs_links.sh
 ```
 
+Non-destructive diagnostics pack:
+
+```bash
+bash scripts/doctor.sh
+```
+
 ## 7) Pre-release validation gate
 
 Non-destructive by default:
