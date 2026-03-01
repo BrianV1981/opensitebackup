@@ -141,6 +141,12 @@ Backend selection:
 - Execution plan (90 days): `strategy/90_day_execution_plan.md`
 - Monetization roadmap: `strategy/12_month_monetization_roadmap.md`
 
+## CI / Quality gates
+
+- GitHub Actions CI lints shell scripts across `scripts/`, `adapters/`, and `backends/`
+- CI also runs `bash -n` syntax validation for all runtime shell entrypoints
+- Local merge gate: `bash scripts/pre_release_check.sh`
+
 ---
 
 ## Documentation Policy (Hard Rule)
