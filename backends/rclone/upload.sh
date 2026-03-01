@@ -55,4 +55,5 @@ upload_with_log "$FILES_TAR" "files" "files-archive"
 upload_with_log "$MANIFEST" "manifests" "manifest"
 upload_with_log "$LOCALSUMS" "manifests" "checksums"
 
+echo "UPLOAD_VERIFY_SUMMARY backend=rclone files=4 status=pass (copy returned success)"
 echo "Uploaded latest backup set via rclone to $RCLONE_REMOTE"

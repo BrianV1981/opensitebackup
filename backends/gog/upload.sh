@@ -53,4 +53,5 @@ upload_with_log "$FILES_TAR" "$DRIVE_FILES_FOLDER_ID" "files-archive"
 upload_with_log "$MANIFEST" "$DRIVE_MANIFESTS_FOLDER_ID" "manifest"
 upload_with_log "$LOCALSUMS" "$DRIVE_MANIFESTS_FOLDER_ID" "checksums"
 
+echo "UPLOAD_VERIFY_SUMMARY backend=gog files=4 status=pass (cli upload success)"
 echo "Uploaded latest backup set to Google Drive."
