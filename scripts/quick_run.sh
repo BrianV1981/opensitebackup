@@ -19,7 +19,10 @@ source "$OSB_HOME/scripts/log.sh"
 osb_log INFO "quick_run start"
 
 bash "$OSB_HOME/scripts/session_prep.sh"
-bash "$OSB_HOME/scripts/01_pull_live_backup.sh"
+if ! bash "$OSB_HOME/scripts/01_pull_live_backup.sh"; then
+  echo "QUICK_RUN_ERROR stage=backup hint='Check SSH auth (bash scripts/session_prep.sh) and then retry.'"
+  exit 1
+fi
 bash "$OSB_HOME/scripts/02_verify_backup.sh"
 bash "$OSB_HOME/scripts/03_upload_to_drive.sh"
 

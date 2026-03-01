@@ -32,6 +32,8 @@ bash scripts/quick_run.sh
 bash scripts/quick_run.sh --profile <site-slug>
 ```
 
+If quick run fails at backup stage, it now prints a direct SSH-prep hint.
+
 If your SSH key is passphrase-protected and session prep runs in non-interactive mode, set:
 
 ```bash
