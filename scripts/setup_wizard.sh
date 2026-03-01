@@ -31,6 +31,11 @@ prompt LOCAL_DB_HOST "Local DB host" "usually localhost" "localhost"
 prompt OSB_BACKEND "Upload backend" "local|rclone|gog" "local"
 prompt LOCAL_UPLOAD_ROOT "Local upload root" "for local backend copies" "$OSB_HOME/data/state/local_uploads"
 
+DRIVE_ACCOUNT="${DRIVE_ACCOUNT:-}"
+if [[ "$OSB_BACKEND" == "gog" ]]; then
+  prompt DRIVE_ACCOUNT "Google account email for gog" "used for drive upload/download api account selection" ""
+fi
+
 cat > "$OUT" <<EOF
 export OSB_HOME="$OSB_HOME"
 export OSB_CONFIG="$OUT"
@@ -63,7 +68,7 @@ export OSB_BACKEND="$OSB_BACKEND"
 export LOCAL_UPLOAD_ROOT="$LOCAL_UPLOAD_ROOT"
 
 # gog optional
-# export DRIVE_ACCOUNT="you@example.com"
+export DRIVE_ACCOUNT="$DRIVE_ACCOUNT"
 # export DRIVE_ROOT_FOLDER_ID=""
 # export DRIVE_DB_FOLDER_ID=""
 # export DRIVE_FILES_FOLDER_ID=""

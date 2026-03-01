@@ -96,6 +96,8 @@
 - Added profile-aware onboarding fast paths (`scripts/session_prep.sh --profile`, `scripts/quick_run.sh --profile`).
 - Added `docs/FINAL_EVIDENCE_SUMMARY.md` to consolidate red-team closure + gate evidence for reviewer handoff.
 - Verify flow now handles empty/missing backup state gracefully with clear first-run guidance (instead of raw `ls` failure).
+- Setup wizard now prompts for `DRIVE_ACCOUNT` when `gog` backend is selected and can auto-wire Drive init IDs.
+- Quick run now emits a clear stage-specific SSH guidance hint when backup auth fails.
 
 ### Changed
 - `scripts/01..05` are now backward-compatible wrappers that call adapter/backend implementations.
