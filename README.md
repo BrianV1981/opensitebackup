@@ -163,6 +163,8 @@ cd site
 npm run dev
 ```
 
+Includes: landing page, CTA blocks, FAQ section, and baseline SEO metadata.
+
 ## Documentation
 
 - Docs index (single source map): `docs/DOCS_INDEX.md`
