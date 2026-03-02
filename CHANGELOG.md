@@ -103,6 +103,7 @@
 - Added `scripts/prepare_pr_evidence.sh` to generate reviewer-ready evidence bundle from release artifacts.
 - Added professional Node.js marketing site under `site/` with zero-dependency static server and polished landing page content.
 - Added basic SEO assets for marketing site (`robots.txt`, `sitemap.xml`, OpenGraph/canonical metadata).
+- Expanded marketing site with audience/value blocks and FAQ for clearer product positioning.
 - Verify flow now handles empty/missing backup state gracefully with clear first-run guidance (instead of raw `ls` failure).
 - Setup wizard now prompts for `DRIVE_ACCOUNT` when `gog` backend is selected and can auto-wire Drive init IDs.
 - Quick run now emits a clear stage-specific SSH guidance hint when backup auth fails.

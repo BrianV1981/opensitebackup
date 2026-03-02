@@ -74,10 +74,32 @@ bash scripts/generate_launch_packet.sh</code></pre>
         <li class="warn">⚠️ Cloud provider quotas/credentials are operational dependencies</li>
       </ul>
     </section>
+
+    <section class="section grid">
+      <article class="card">
+        <h3>Who it’s for</h3>
+        <p class="muted">Agencies, freelancers, and technical site owners that need disaster recovery confidence—not just backup archives.</p>
+      </article>
+      <article class="card">
+        <h3>What you get</h3>
+        <p class="muted">A reproducible pipeline with validation gates, release evidence, and operational docs that scale beyond one machine.</p>
+      </article>
+      <article class="card">
+        <h3>Get started</h3>
+        <p class="muted">Clone the repo, run the setup wizard, and execute quick run. Use doctor + release bundle for handoff and signoff.</p>
+      </article>
+    </section>
+
+    <section class="section card">
+      <h3>FAQ</h3>
+      <p><strong>Is Google Drive required?</strong><br/><span class="muted">No. Local backend is the baseline default. gog and rclone are optional backends.</span></p>
+      <p><strong>Can I run this for multiple sites?</strong><br/><span class="muted">Yes. Use profile files under <code>config/sites/&lt;slug&gt;.env</code> and switch with <code>use_site_profile.sh</code>.</span></p>
+      <p><strong>How do I prove release readiness?</strong><br/><span class="muted">Run pre-release checks and generate launch + PR evidence bundles from scripts in the repo.</span></p>
+    </section>
   </main>
 
   <footer>
-    <div class="wrap muted">© OpenSiteBackup · Restore-first operations tooling</div>
+    <div class="wrap muted">© OpenSiteBackup · Restore-first operations tooling · <a href="https://github.com/BrianV1981/opensitebackup" target="_blank" rel="noreferrer">GitHub</a></div>
   </footer>
 </body>
 </html>
