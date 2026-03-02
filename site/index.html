@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenSiteBackup — Restore-First Website Backup</title>
+  <meta name="description" content="OpenSiteBackup is a restore-first backup engine for WordPress and website operations. Backup, verify, upload, and prove recovery." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <strong>OpenSiteBackup</strong>
+      <span class="pill">Restore-first · OSS Alpha</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Backups are useless<br/>if restores fail.</h1>
+      <p>OpenSiteBackup is a professional, restore-first backup pipeline for website operators. It automates backup, integrity verification, storage upload, and staged restore drills with safety gates.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/BrianV1981/opensitebackup" target="_blank" rel="noreferrer">View on GitHub</a>
+        <a class="btn" href="../README.md">Quick Start</a>
+      </div>
+    </section>
+
+    <section class="section status">
+      <div class="kpi"><div class="n">Staged</div><div class="muted">Atomic restore + rollback snapshot</div></div>
+      <div class="kpi"><div class="n">Strict</div><div class="muted">Env validation before actions</div></div>
+      <div class="kpi"><div class="n">Portable</div><div class="muted">Backend-neutral (local/rclone/gog)</div></div>
+      <div class="kpi"><div class="n">Auditable</div><div class="muted">Release evidence + go/no-go packet</div></div>
+    </section>
+
+    <section class="section grid">
+      <article class="card">
+        <h3>1) Backup + Verify</h3>
+        <p class="muted">Captures files + database, validates archive integrity, SQL sanity, and checksums before upload.</p>
+      </article>
+      <article class="card">
+        <h3>2) Upload Backends</h3>
+        <p class="muted">Use local by default. Optional cloud via rclone or gog. Optional backend failures don’t block required local baseline.</p>
+      </article>
+      <article class="card">
+        <h3>3) Restore Confidence</h3>
+        <p class="muted">Runs staged restore checks before swap and keeps rollback path. Emits RESTORE_SUMMARY markers for evidence.</p>
+      </article>
+    </section>
+
+    <section class="section card">
+      <h3>Operator Quick Run</h3>
+      <p class="muted">For fast onboarding, use guided setup + session prep + quick run:</p>
+      <pre><code>bash scripts/setup_wizard.sh
+bash scripts/session_prep.sh
+bash scripts/quick_run.sh</code></pre>
+      <p class="muted">For release readiness:</p>
+      <pre><code>bash scripts/pre_release_check.sh
+bash scripts/release_prepare.sh
+bash scripts/generate_launch_packet.sh</code></pre>
+    </section>
+
+    <section class="section card">
+      <h3>Current Alpha Position</h3>
+      <ul class="timeline">
+        <li>✅ Core backup/verify/restore pipeline proven</li>
+        <li>✅ Red-team hardening cycle implemented and archived</li>
+        <li>✅ Documentation consolidated with canonical index</li>
+        <li>✅ Operator diagnostics (<code>doctor.sh</code>, <code>status_snapshot.sh</code>)</li>
+        <li class="warn">⚠️ Cloud provider quotas/credentials are operational dependencies</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap muted">© OpenSiteBackup · Restore-first operations tooling</div>
+  </footer>
+</body>
+</html>

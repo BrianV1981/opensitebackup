@@ -17,6 +17,8 @@ Last reviewed: 2026-03-01 (deep coherence sweep)
 
 ## Supporting active docs
 
+- `site/README.md` (Node marketing site local run guide)
+
 - `docs/architecture_decisions.md`
 - `docs/backend_validation_matrix.md`
 - `docs/launch_readiness.md`

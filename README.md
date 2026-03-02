@@ -152,6 +152,17 @@ Backend selection:
 
 ---
 
+## Marketing site (Node.js)
+
+A professional promo site is included under `site/`.
+
+Run locally:
+
+```bash
+cd site
+npm run dev
+```
+
 ## Documentation
 
 - Docs index (single source map): `docs/DOCS_INDEX.md`
