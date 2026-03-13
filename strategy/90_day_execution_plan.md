@@ -106,17 +106,24 @@ opensitebackup/
 
 ## 3) Delivery model (90 days)
 
-## Phase 0 — Alignment & setup (Week 1)
+## Phase 0 — Alignment, cleanup & setup (Week 1)
+
+### Work items
+- Resolve storage-path confusion and define one canonical cloud landing path
+- Inventory existing Drive folders/artifacts and map old vs new structure
+- Decide migration policy (copy-forward vs fresh run) and document rollback
 
 ### Deliverables
 - Confirm product name: OpenSiteBackup
 - Confirm license (MIT or Apache-2.0)
 - Repo initialized with base structure
 - CODEOWNERS + branch strategy + issue labels
+- `docs/storage_migration_plan.md` with source/target folder IDs and cutover steps
 
 ### Acceptance criteria
 - Team can clone repo and run bootstrap shell checks
 - CI runs lint for shell/docs
+- One canonical cloud target is documented and validated by a successful upload
 
 ---
 
@@ -189,6 +196,25 @@ opensitebackup/
 - Same backup can upload with backend switch only (no core changes)
 - Upload logs include timestamps, file sizes, duration
 - Failure retries documented (and partially automated)
+
+---
+
+## Phase 3.5 — Credential/runtime hardening (Week 8-9)
+
+### Work items
+- Standardize non-interactive credential loading for all backends/scripts
+- Ensure cron/agent/runtime environments source project credentials deterministically
+- Add explicit diagnostics for missing keyring/token env vars
+- Add backend healthcheck command(s) to verify auth before upload
+
+### Deliverables
+- `config/credentials.env.example` (or equivalent) with backend auth vars
+- shared `scripts/load_credentials.sh` (or equivalent) consumed by upload scripts
+- docs section: "Agent/Cron-safe credentials"
+
+### Acceptance criteria
+- Upload/email flows succeed from cron and non-interactive agent runs
+- No hidden interactive prompts during scheduled runs
 
 ---
 
@@ -311,6 +337,9 @@ OpenSiteBackup v1 is done when all are true:
 - Incremental backups
 - Built-in scheduler
 - Notifications (Discord/Slack/email)
+- OAuth cloud connectors (Google Drive, Dropbox, OneDrive) via a provider-agnostic backend interface
+- BYOS modes (OAuth connectors + advanced S3/rclone path)
+- Token vault + encryption-at-rest + rotation/revoke workflows
 - Team/RBAC + audit log (hosted control plane)
 - Additional source adapters (Ghost/static/custom)
 - Encryption at rest and key management policy
@@ -319,9 +348,12 @@ OpenSiteBackup v1 is done when all are true:
 
 ## 10) Immediate action checklist (next 7 days)
 
+- [ ] Inventory Drive folders and confirm canonical cloud landing path (`opensitebackup` vs legacy `Backups`)
+- [ ] Clean stale local artifacts (`data/tmp`, old site snapshots) while preserving one verified restore point
 - [ ] Initialize repo standards (license, CI, contribution docs)
 - [ ] Refactor current scripts into adapter/backend structure
 - [ ] Add preflight command: SSH + path + WP-CLI checks
+- [ ] Add non-interactive credential loader used by all backend scripts
 - [ ] Capture one complete successful run log set
 - [ ] Record one successful restore drill log set
 - [ ] Publish `v0.1.0-alpha` internal tag

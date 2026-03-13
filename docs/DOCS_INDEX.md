@@ -1,6 +1,6 @@
 # OpenSiteBackup Docs Index
 
-Last reviewed: 2026-03-01 (deep coherence sweep)
+Last reviewed: 2026-03-13 (deep coherence sweep)
 
 ## Active canonical docs
 
@@ -26,12 +26,15 @@ Last reviewed: 2026-03-01 (deep coherence sweep)
 - `docs/release_notes_template.md`
 - `docs/FINAL_EVIDENCE_SUMMARY.md`
 - `docs/troubleshooting_matrix.md`
-- `docs/self_contained_mode.md
+- `docs/self_contained_mode.md`
 - `docs/HANDOFF_PACK.md`
 - `docs/documentation_policy.md`
 - `docs/positioning_and_gtm.md`
+- `docs/PRICING_AND_PACKAGING.md`
+- `docs/ROADMAP_EXECUTION_AND_GATES.md`
 - `docs/glossary.md`
 - `docs/recovery_checkpoint.md`
+- `docs/storage_migration_plan.md`
 
 ## Archived docs
 
