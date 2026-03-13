@@ -136,6 +136,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/test_phase1_backup_core.sh` (backup adapter contract checks for Phase 1)
 - `scripts/test_phase2_verify_restore.sh` (verify/restore contract checks for Phase 2)
 - `scripts/test_phase3_backends.sh` (backend reliability contract checks for Phase 3)
+- `scripts/test_phase4_docs_handoff.sh` (docs + handoff contract checks for Phase 4)
 
 Core implementation paths:
 - `adapters/wordpress/`

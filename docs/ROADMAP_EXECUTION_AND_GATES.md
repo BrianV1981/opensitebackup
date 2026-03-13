@@ -77,6 +77,11 @@ Reports are written under:
   - phase2 + backend contract checks (`scripts/test_phase3_backends.sh`)
   - backend smoke + local upload
 
+- `phase4 gate` (via `scripts/phase_gate.sh phase4`):
+  - phase3 suite
+  - docs link checks
+  - docs/handoff contract checks (`scripts/test_phase4_docs_handoff.sh`)
+
 - `full`:
   - phase3 + pre-release check
 
