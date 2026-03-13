@@ -1,9 +1,15 @@
 # Infrastructure Quickstart
 
-## 1) Initialize local config
+## 1) Install + initialize local config
 ```bash
+# one-click bootstrap
+bash scripts/install.sh
+
 # option A: guided wizard
 bash scripts/setup_wizard.sh
+
+# optional fast default scaffold (non-interactive baseline)
+OSB_WIZARD_USE_DEFAULTS=1 bash scripts/setup_wizard.sh
 
 # option B: manual
 cp config/env.example config/env.sh
