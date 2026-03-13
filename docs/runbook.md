@@ -32,6 +32,14 @@ bash scripts/quick_run.sh
 bash scripts/quick_run.sh --profile <site-slug>
 ```
 
+Adoption-first one-click style wrappers:
+
+```bash
+bash scripts/backup_now.sh
+bash scripts/test_restore_local.sh
+bash scripts/recovery_status.sh
+```
+
 If quick run fails at backup stage, it now prints a direct SSH-prep hint.
 
 If your SSH key is passphrase-protected and session prep runs in non-interactive mode, set:

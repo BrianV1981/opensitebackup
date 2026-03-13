@@ -118,6 +118,7 @@ Before heavy paid expansion, free UX should satisfy:
 1. Free UX hardening
    - installer + setup wizard polish
    - one-click backup/restore test actions
+   - recovery confidence status command
 2. Pro foundation
    - scheduler + retention + notifications
 3. Connector layer

@@ -99,4 +99,9 @@ For each roadmap milestone:
 3. Save evidence in commit/PR notes
 4. Update docs in same change
 
+For post-roadmap UX epics, run:
+```bash
+bash scripts/test_adoption_ux.sh
+```
+
 This keeps roadmap execution measurable and auditable.
