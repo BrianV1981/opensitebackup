@@ -32,7 +32,9 @@ case "$PHASE" in
     ;;
   phase5)
     bash scripts/test_suite.sh full
+    bash scripts/test_phase5_release_readiness.sh
     ;;
+
   *)
     echo "Unknown phase: $PHASE" >&2
     exit 2

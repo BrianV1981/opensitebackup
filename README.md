@@ -137,6 +137,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/test_phase2_verify_restore.sh` (verify/restore contract checks for Phase 2)
 - `scripts/test_phase3_backends.sh` (backend reliability contract checks for Phase 3)
 - `scripts/test_phase4_docs_handoff.sh` (docs + handoff contract checks for Phase 4)
+- `scripts/test_phase5_release_readiness.sh` (release evidence + launch packet checks for Phase 5)
 
 Core implementation paths:
 - `adapters/wordpress/`

@@ -82,6 +82,10 @@ Reports are written under:
   - docs link checks
   - docs/handoff contract checks (`scripts/test_phase4_docs_handoff.sh`)
 
+- `phase5 gate` (via `scripts/phase_gate.sh phase5`):
+  - full suite (`scripts/test_suite.sh full`)
+  - release-readiness contract checks (`scripts/test_phase5_release_readiness.sh`)
+
 - `full`:
   - phase3 + pre-release check
 
