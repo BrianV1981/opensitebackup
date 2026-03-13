@@ -74,7 +74,8 @@ Reports are written under:
   - verify/restore contract checks (`scripts/test_phase2_verify_restore.sh`)
 
 - `phase3`:
-  - phase2 + backend smoke + local upload
+  - phase2 + backend contract checks (`scripts/test_phase3_backends.sh`)
+  - backend smoke + local upload
 
 - `full`:
   - phase3 + pre-release check

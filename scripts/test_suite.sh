@@ -49,6 +49,7 @@ run_phase2() {
 }
 
 run_phase3() {
+  run_step "phase3 backend contracts" bash scripts/test_phase3_backends.sh
   run_step "backend smoke" bash scripts/backend_matrix_smoke.sh
   run_step "local upload" bash -c 'OSB_BACKEND=local bash scripts/03_upload_to_drive.sh'
 }
