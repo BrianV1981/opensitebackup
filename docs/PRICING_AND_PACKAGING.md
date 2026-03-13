@@ -9,6 +9,7 @@ Keep the **core recovery workflow free and easy**, then monetize automation, sca
 The free version should feel usable by a non-technical owner:
 - 1-click install
 - guided setup
+- 1-click first-run bootstrap flow
 - 1-click backup
 - 1-click local restore test
 - clear pass/fail recovery checks

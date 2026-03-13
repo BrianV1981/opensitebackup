@@ -2,7 +2,10 @@
 
 ## 1) Install + initialize local config
 ```bash
-# one-click bootstrap
+# true first-run helper (install + setup + preflight)
+bash scripts/first_run.sh
+
+# or one-click bootstrap only
 bash scripts/install.sh
 
 # option A: guided wizard

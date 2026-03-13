@@ -35,6 +35,7 @@ bash scripts/quick_run.sh --profile <site-slug>
 Adoption-first one-click style wrappers:
 
 ```bash
+bash scripts/first_run.sh
 bash scripts/backup_now.sh
 bash scripts/test_restore_local.sh
 bash scripts/recovery_status.sh

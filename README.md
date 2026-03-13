@@ -130,6 +130,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/status_snapshot.sh` (quick operator status summary)
 - `scripts/recovery_status.sh` (green/yellow/red recovery confidence summary)
 - `scripts/install.sh` (bootstrap directories + baseline checks)
+- `scripts/first_run.sh` (installer + setup + preflight in one flow)
 - `scripts/backup_now.sh` (single-command strict preflight -> backup -> verify -> upload)
 - `scripts/test_restore_local.sh` (single-command local restore drill)
 - `scripts/doctor.sh` (non-destructive health diagnostics)
