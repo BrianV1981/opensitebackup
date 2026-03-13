@@ -12,9 +12,17 @@ TS="$(date +%Y%m%d_%H%M%S)"
 RUN_DIR="$LOCAL_BACKUP_ROOT/$TS"
 mkdir -p "$RUN_DIR"
 
+REMOTE_CREATED=0
+
 cleanup_on_error() {
   local code=$?
+  trap - EXIT
   if [[ $code -ne 0 ]]; then
+    if [[ "$REMOTE_CREATED" -eq 1 && -n "${SSH_OPTS:-}" && -n "${REMOTE_FILES:-}" ]]; then
+      echo "[$(date -Is)] Cleanup: attempting remote temp cleanup after failure ..."
+      ssh $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}" "rm -f '${REMOTE_FILES}' '${REMOTE_DB}' '${REMOTE_SUMS}'" >/dev/null 2>&1 || true
+    fi
+
     if [[ -d "$RUN_DIR" ]] && [[ -z "$(find "$RUN_DIR" -mindepth 1 -maxdepth 1 -print -quit 2>/dev/null)" ]]; then
       rmdir "$RUN_DIR" 2>/dev/null || true
       echo "[$(date -Is)] Cleanup: removed empty failed run dir $RUN_DIR"
@@ -35,6 +43,7 @@ REMOTE_DB="/home/${LIVE_SSH_USER}/${REMOTE_PREFIX}_db.sql"
 REMOTE_SUMS="/home/${LIVE_SSH_USER}/${REMOTE_PREFIX}_sha256.txt"
 
 echo "[$(date -Is)] [1/5] Creating remote archives on ${LIVE_SSH_HOST} ..."
+REMOTE_CREATED=1
 ssh $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}" bash <<EOF
 set -e
 cd "${LIVE_SITE_PATH}"

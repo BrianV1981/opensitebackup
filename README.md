@@ -131,6 +131,10 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/doctor.sh` (non-destructive health diagnostics)
 - `scripts/init_drive_structure.sh` (optional Google Drive folder bootstrap)
 - `scripts/check_docs_links.sh` (docs link consistency check)
+- `scripts/test_suite.sh` (roadmap test levels: quick|phase1|phase2|phase3|full)
+- `scripts/phase_gate.sh` (phase-by-phase gate runner)
+- `scripts/test_phase1_backup_core.sh` (backup adapter contract checks for Phase 1)
+- `scripts/test_phase2_verify_restore.sh` (verify/restore contract checks for Phase 2)
 
 Core implementation paths:
 - `adapters/wordpress/`
@@ -164,6 +168,19 @@ npm run dev
 ```
 
 Includes: landing page, CTA blocks, FAQ section, and baseline SEO metadata.
+
+## Adoption-first UX (free)
+
+OpenSiteBackup’s free path is intended to be novice-friendly:
+- 1-click install
+- guided setup flow
+- 1-click backup now
+- 1-click local restore test
+- clear recovery confidence checks
+
+Roadmap and packaging details:
+- `docs/PRICING_AND_PACKAGING.md`
+- `strategy/12_month_monetization_roadmap.md`
 
 ## Documentation
 

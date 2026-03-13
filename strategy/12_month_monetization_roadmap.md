@@ -1,7 +1,7 @@
 # 12-Month Monetization Roadmap
 
 ## Goal
-Build adoption with open-source reliability, then monetize operational convenience and multi-site management.
+Build adoption with open-source reliability and a novice-friendly free UX, then monetize operational convenience and multi-site management.
 
 ## Phase 1 (Months 0-2): OSS Foundation
 
@@ -10,6 +10,7 @@ Build adoption with open-source reliability, then monetize operational convenien
 - Storage adapter interface (local, rclone, gog optional)
 - Deterministic logs + checksums + manifests
 - Restore-drill script and docs
+- Adoption-first UX baseline: 1-click install, guided setup, 1-click backup, 1-click local restore test
 
 ### GTM
 - Publish GitHub repo with clear DR-first positioning
@@ -26,6 +27,8 @@ Build adoption with open-source reliability, then monetize operational convenien
 - Multi-site config handling
 - Better retry/resume and notifications
 - Basic web dashboard (self-hosted)
+- OAuth connector framework (token vault + provider interface)
+- First native OAuth provider (Google Drive)
 
 ### Monetization tests
 - Paid "Pro Pack" for:
@@ -45,6 +48,8 @@ Build adoption with open-source reliability, then monetize operational convenien
 - Hosted dashboard for multi-site orchestration
 - Team accounts, RBAC, activity history
 - Bring-your-own-storage + managed storage option
+- Additional OAuth providers (Dropbox, OneDrive)
+- Connector observability (token refresh failures, quota alerts, upload health)
 
 ### Pricing draft
 - Free OSS self-hosted
