@@ -28,6 +28,7 @@ case "$PHASE" in
   phase4)
     bash scripts/test_suite.sh phase3
     bash scripts/check_docs_links.sh
+    bash scripts/test_phase4_docs_handoff.sh
     ;;
   phase5)
     bash scripts/test_suite.sh full
