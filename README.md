@@ -129,6 +129,7 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/prepare_pr_evidence.sh` (builds PR-ready evidence markdown)
 - `scripts/status_snapshot.sh` (quick operator status summary)
 - `scripts/recovery_status.sh` (green/yellow/red recovery confidence summary)
+- `scripts/install.sh` (bootstrap directories + baseline checks)
 - `scripts/backup_now.sh` (single-command strict preflight -> backup -> verify -> upload)
 - `scripts/test_restore_local.sh` (single-command local restore drill)
 - `scripts/doctor.sh` (non-destructive health diagnostics)
@@ -178,11 +179,11 @@ Includes: landing page, CTA blocks, FAQ section, and baseline SEO metadata.
 ## Adoption-first UX (free)
 
 OpenSiteBackup’s free path is intended to be novice-friendly:
-- 1-click install
-- guided setup flow
-- 1-click backup now
-- 1-click local restore test
-- clear recovery confidence checks
+- 1-click install (`bash scripts/install.sh`)
+- guided setup flow (`bash scripts/setup_wizard.sh`)
+- 1-click backup now (`bash scripts/backup_now.sh`)
+- 1-click local restore test (`bash scripts/test_restore_local.sh`)
+- clear recovery confidence checks (`bash scripts/recovery_status.sh`)
 
 Roadmap and packaging details:
 - `docs/PRICING_AND_PACKAGING.md`

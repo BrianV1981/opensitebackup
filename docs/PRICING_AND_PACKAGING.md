@@ -119,6 +119,7 @@ Before heavy paid expansion, free UX should satisfy:
    - installer + setup wizard polish
    - one-click backup/restore test actions
    - recovery confidence status command
+   - non-interactive default scaffold mode for first-run setup
 2. Pro foundation
    - scheduler + retention + notifications
 3. Connector layer
