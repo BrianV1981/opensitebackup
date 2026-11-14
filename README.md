@@ -248,4 +248,4 @@ The long-term model can support optional managed control-plane features, but the
 
 ## License
 
-MIT — see `LICENSE`.
+GNU General Public License v3.0 (`GPL-3.0`) — see `LICENSE` (relicensed from MIT for commits/releases going forward; prior commits and `v0.1.0-alpha.*` tags remain under MIT).
