@@ -23,7 +23,7 @@ echo "cleanup target=$LOCAL_BACKUP_ROOT dry_run=$DRY_RUN"
 if [[ "$OSB_RETENTION_PRUNE_EMPTY" == "1" ]]; then
   while IFS= read -r -d '' d; do
     echo "PRUNE_EMPTY $d"
-    [[ $DRY_RUN -eq 0 ]] && rmdir "$d" || true
+    if [[ $DRY_RUN -eq 0 ]]; then rmdir "$d" || true; fi
   done < <(find "$LOCAL_BACKUP_ROOT" -mindepth 1 -maxdepth 1 -type d -empty -print0)
 fi
 
@@ -38,7 +38,7 @@ fi
 for ((i=keep; i<${#dirs[@]}; i++)); do
   d="${dirs[$i]}"
   echo "PRUNE_OLD $d"
-  [[ $DRY_RUN -eq 0 ]] && rm -rf "$d" || true
+  if [[ $DRY_RUN -eq 0 ]]; then rm -rf "$d" || true; fi
 done
 
 echo "cleanup complete"

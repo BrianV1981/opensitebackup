@@ -76,7 +76,7 @@ atomic_restore_apply() {
   echo "[restore] import staged db"
   if ! wp_cmd db import "$db_sql"; then
     echo "Restore failed during DB import"
-    [[ -f "$db_rollback" ]] && wp_cmd db import "$db_rollback" >/dev/null 2>&1 || true
+    if [[ -f "$db_rollback" ]]; then wp_cmd db import "$db_rollback" >/dev/null 2>&1 || true; fi
     return 1
   fi
 
@@ -86,7 +86,7 @@ atomic_restore_apply() {
   echo "[restore] validate staged site"
   if ! validate_staged_restore; then
     echo "Restore validation failed; attempting DB rollback"
-    [[ -f "$db_rollback" ]] && wp_cmd db import "$db_rollback" >/dev/null 2>&1 || true
+    if [[ -f "$db_rollback" ]]; then wp_cmd db import "$db_rollback" >/dev/null 2>&1 || true; fi
     return 1
   fi
 

@@ -4,7 +4,7 @@ Date: 2026-02-28T21:56:01-05:00
 
 ## Status
 - Local site path: $HOME/opensitebackup/data/sites/example.com
-- Site URL: http://localhost:8081
+- Site URL: http://localhost:8080
 - Blog name: Example Business Site
 - Theme: astra
 - Page count: 27

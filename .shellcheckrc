@@ -1,0 +1,2 @@
+# Dynamic runtime config sourcing (config/env.sh) and controlled timestamp dir sorting
+disable=SC1090,SC2012

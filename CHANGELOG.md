@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased] - 2026-11-16
+### Changed
+- Relicensed repository to **GNU GPL v3.0 (`GPL-3.0`)** going forward (prior commits and `v0.1.0-alpha.*` tags remain under MIT).
+- Promoted `dev/opensitebackup-execution` into `main` as the unified default branch and pruned stale snapshot branches.
+- Fixed ShellCheck (`SC2068`, `SC2086`, `SC2028`, `SC2015`) findings, runtime `data/` doc-link exclusions, and portable `$HOME` paths across `config/env.example` and `docs/`.
+
 ## [Unreleased]
 ### Added
 - Adapter/backend structure:

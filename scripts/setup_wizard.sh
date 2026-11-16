@@ -7,7 +7,7 @@ OUT="${OSB_CONFIG:-$OSB_HOME/config/env.sh}"
 
 prompt(){
   local var="$1"; local msg="$2"; local hint="$3"; local def="${4:-}"
-  echo "\n$msg"
+  printf '\n%s\n' "$msg"
   echo "  hint: $hint"
   read -rp "  value [${def}]: " val || true
   val="${val:-$def}"
@@ -109,7 +109,7 @@ export OSB_RETENTION_PRUNE_EMPTY="1"
 EOF
 
 chmod 600 "$OUT"
-echo "\nWrote config: $OUT"
+printf '\nWrote config: %s\n' "$OUT"
 
 if [[ "$OSB_BACKEND" == "gog" ]]; then
   read -rp "Initialize Drive structure now (opensitebackup/db/files/manifests/logs)? [y/N]: " ans || true

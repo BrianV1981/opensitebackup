@@ -12,6 +12,7 @@ while IFS= read -r -d '' file; do
     [[ -n "$rel" ]] || continue
     [[ "$rel" == *.md ]] || continue
     [[ "$rel" =~ ^https?:// ]] && continue
+    [[ "$rel" == data/* ]] && continue
 
     if [[ "$rel" == ./* || "$rel" == ../* ]]; then
       target="$(cd "$(dirname "$file")" && realpath -m "$rel")"
@@ -30,6 +31,7 @@ while IFS= read -r -d '' file; do
       echo "BROKEN_DOC_LINK file=$file target=$rel"
       fail=1
     fi
+    # shellcheck disable=SC2016
   done < <(grep -oE '`[^`]+\.md(#[-A-Za-z0-9_./]+)?`' "$file" || true)
 done < <(find README.md docs strategy -type f -name '*.md' -print0 2>/dev/null)
 

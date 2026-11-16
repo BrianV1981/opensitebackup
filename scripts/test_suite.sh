@@ -21,7 +21,7 @@ fail=0
 
 run_step() {
   local name="$1"; shift
-  echo "\n== $name ==" | tee -a "$LOG"
+  printf '\n== %s ==\n' "$name" | tee -a "$LOG"
   if "$@" >>"$LOG" 2>&1; then
     echo "PASS: $name" | tee -a "$LOG"
     pass=$((pass+1))
