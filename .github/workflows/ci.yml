@@ -9,7 +9,7 @@ env:
 
 jobs:
   shellcheck:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
 
@@ -26,7 +26,7 @@ jobs:
 
       - name: Anti-hardcoding & host hygiene guard
         run: |
-          if grep -RInP '/home/(?!wpuser|operator|runner|ciuser|<user>)[a-zA-Z0-9_-]+|localhost:8081|hardcoded-pass' scripts adapters backends config docs strategy; then
+          if grep -RInP '/home/(?!wpuser|operator|runner|ciuser|<user>)[a-zA-Z0-9_-]+|localhost:8081|ChangeThisNow' scripts adapters backends config docs strategy; then
             echo "Found banned hardcoded host/runtime token(s)" >&2
             exit 1
           fi
