@@ -44,7 +44,9 @@ upload_with_log() {
   size=$(du -h "$file" | awk '{print $1}')
   start=$(date +%s)
   echo "[$(date -Is)] START upload: $label | $(basename "$file") | size=$size"
-  retry_upload rclone copy "$file" "${RCLONE_REMOTE}/${subdir}" $RCLONE_FLAGS
+  local rclone_flag_arr=()
+  read -r -a rclone_flag_arr <<< "$RCLONE_FLAGS"
+  retry_upload rclone copy "$file" "${RCLONE_REMOTE}/${subdir}" "${rclone_flag_arr[@]}"
   end=$(date +%s)
   dur=$((end-start))
   echo "[$(date -Is)] DONE  upload: $label | duration=${dur}s"

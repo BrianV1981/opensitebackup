@@ -7,7 +7,7 @@ OUT="${OSB_CONFIG:-$OSB_HOME/config/env.sh}"
 
 prompt(){
   local var="$1"; local msg="$2"; local hint="$3"; local def="${4:-}"
-  echo "\n$msg"
+  printf '\n%s\n' "$msg"
   echo "  hint: $hint"
   read -rp "  value [${def}]: " val || true
   val="${val:-$def}"
@@ -16,6 +16,24 @@ prompt(){
 
 echo "OpenSiteBackup Setup Wizard (guided)"
 mkdir -p "$(dirname "$OUT")"
+
+# Fast defaults for novice setup
+if [[ "${OSB_WIZARD_USE_DEFAULTS:-0}" == "1" ]]; then
+  SOURCE_SITE_SLUG="${SOURCE_SITE_SLUG:-site}"
+  LIVE_SSH_HOST="${LIVE_SSH_HOST:-example.com}"
+  LIVE_SSH_USER="${LIVE_SSH_USER:-wpuser}"
+  LIVE_SITE_PATH="${LIVE_SITE_PATH:-/home/wpuser/public_html}"
+  LIVE_SSH_KEY="${LIVE_SSH_KEY:-$HOME/.ssh/id_ed25519}"
+  LOCAL_RESTORE_PATH="${LOCAL_RESTORE_PATH:-$OSB_HOME/data/sites/$SOURCE_SITE_SLUG}"
+  LOCAL_URL="${LOCAL_URL:-http://localhost:8080}"
+  LOCAL_DB_NAME="${LOCAL_DB_NAME:-wp_local}"
+  LOCAL_DB_USER="${LOCAL_DB_USER:-wp_user}"
+  LOCAL_DB_PASSWORD="${LOCAL_DB_PASSWORD:-change-me}"
+  LOCAL_DB_HOST="${LOCAL_DB_HOST:-localhost}"
+  OSB_BACKEND="${OSB_BACKEND:-local}"
+  LOCAL_UPLOAD_ROOT="${LOCAL_UPLOAD_ROOT:-$OSB_HOME/data/state/local_uploads}"
+  DRIVE_ACCOUNT="${DRIVE_ACCOUNT:-}"
+else
 
 prompt SOURCE_SITE_SLUG "Site slug" "lowercase identifier, e.g. mysite" "site"
 prompt LIVE_SSH_HOST "Live SSH host" "from hosting SSH panel" ""
@@ -34,6 +52,7 @@ prompt LOCAL_UPLOAD_ROOT "Local upload root" "for local backend copies" "$OSB_HO
 DRIVE_ACCOUNT="${DRIVE_ACCOUNT:-}"
 if [[ "$OSB_BACKEND" == "gog" ]]; then
   prompt DRIVE_ACCOUNT "Google account email for gog" "used for drive upload/download api account selection" ""
+fi
 fi
 
 cat > "$OUT" <<EOF
@@ -90,7 +109,7 @@ export OSB_RETENTION_PRUNE_EMPTY="1"
 EOF
 
 chmod 600 "$OUT"
-echo "\nWrote config: $OUT"
+printf '\nWrote config: %s\n' "$OUT"
 
 if [[ "$OSB_BACKEND" == "gog" ]]; then
   read -rp "Initialize Drive structure now (opensitebackup/db/files/manifests/logs)? [y/N]: " ans || true

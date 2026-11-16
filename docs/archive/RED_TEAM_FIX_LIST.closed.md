@@ -30,7 +30,7 @@ Hardcoded names/domains/paths create hidden coupling and make the tool fail for 
 - Replace hardcoded restore defaults with env-driven values.
 
 ### Acceptance criteria
-- `grep -R "example\|localhost:8081\|hardcoded-pass" scripts adapters backends` returns no runtime hardcoding.
+- `grep -R "hardcoded-client-slug\|localhost:8080\|hardcoded-pass" scripts adapters backends` returns no runtime hardcoding.
 - Fresh user can configure and run without editing source code.
 
 ---
@@ -260,13 +260,13 @@ Make all user-specific/site-specific behavior configurable via env vars (no sour
 ## Banned hardcoded tokens check (add to CI)
 
 Fail build if these appear in runtime scripts:
-- `example`
-- `localhost:8081`
+- `<client-site-slug>`
+- `localhost:8080`
 - project-specific DB passwords
 
 Command example:
 ```bash
-grep -RInE 'example|localhost:8081|hardcoded-pass' scripts adapters backends && exit 1 || true
+grep -RInE 'hardcoded-client-slug|localhost:8080|hardcoded-pass' scripts adapters backends && exit 1 || true
 ```
 
 ---

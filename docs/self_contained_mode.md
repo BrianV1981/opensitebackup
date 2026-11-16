@@ -48,6 +48,6 @@ $OSB_HOME/
 
 ## Example
 ```bash
-export OSB_HOME="$HOME/.openclaw/workspace/opensitebackup"
+export OSB_HOME="$HOME/opensitebackup"
 source "$OSB_HOME/config/env.sh"
 ```

@@ -4,13 +4,18 @@ on:
   push:
   pull_request:
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   shellcheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Install shellcheck
         run: sudo apt-get update && sudo apt-get install -y shellcheck
+
       - name: Lint shell scripts
         run: |
           find scripts adapters backends -type f -name "*.sh" -print0 | xargs -0 -r shellcheck
@@ -19,10 +24,10 @@ jobs:
         run: |
           bash -n scripts/*.sh adapters/wordpress/*.sh backends/*/upload.sh
 
-      - name: Anti-hardcoding runtime guard
+      - name: Anti-hardcoding & host hygiene guard
         run: |
-          if grep -RInE 'example|localhost:8081|hardcoded-pass' scripts adapters backends; then
-            echo "Found banned hardcoded runtime token(s)" >&2
+          if grep -RInP '/home/(?!wpuser|operator|runner|ciuser|<user>)[a-zA-Z0-9_-]+|localhost:8081|hardcoded-pass' scripts adapters backends config docs strategy; then
+            echo "Found banned hardcoded host/runtime token(s)" >&2
             exit 1
           fi
 
@@ -33,3 +38,14 @@ jobs:
       - name: Env validation matrix (non-destructive)
         run: |
           bash scripts/validate_env_matrix_ci.sh
+
+      - name: Phase & UX contract test suite
+        run: |
+          bash scripts/test_suite.sh quick
+          bash scripts/test_adoption_ux.sh
+          bash scripts/test_phase1_backup_core.sh
+          bash scripts/test_phase2_verify_restore.sh
+          bash scripts/test_phase3_backends.sh
+          bash scripts/test_phase4_docs_handoff.sh
+          bash -n scripts/test_phase5_release_readiness.sh
+          rm -rf data

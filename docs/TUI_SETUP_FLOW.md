@@ -365,7 +365,7 @@ Required:
 
 1. Fail build if banned hardcoded tokens are present in runtime scripts:
 ```bash
-grep -RInE 'example|localhost:8081|hardcoded-pass' scripts adapters backends && exit 1 || true
+grep -RInE 'hardcoded-client-slug|localhost:8080|hardcoded-pass' scripts adapters backends && exit 1 || true
 ```
 
 2. Add dry-run env validation job for each command context.

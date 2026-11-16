@@ -128,9 +128,21 @@ bash scripts/05_restore_from_drive.sh
 - `scripts/generate_launch_packet.sh` (generates go/no-go decision packet)
 - `scripts/prepare_pr_evidence.sh` (builds PR-ready evidence markdown)
 - `scripts/status_snapshot.sh` (quick operator status summary)
+- `scripts/recovery_status.sh` (green/yellow/red recovery confidence summary)
+- `scripts/install.sh` (bootstrap directories + baseline checks)
+- `scripts/first_run.sh` (installer + setup + preflight in one flow)
+- `scripts/backup_now.sh` (single-command strict preflight -> backup -> verify -> upload)
+- `scripts/test_restore_local.sh` (single-command local restore drill)
 - `scripts/doctor.sh` (non-destructive health diagnostics)
 - `scripts/init_drive_structure.sh` (optional Google Drive folder bootstrap)
 - `scripts/check_docs_links.sh` (docs link consistency check)
+- `scripts/test_suite.sh` (roadmap test levels: quick|phase1|phase2|phase3|full)
+- `scripts/phase_gate.sh` (phase-by-phase gate runner)
+- `scripts/test_phase1_backup_core.sh` (backup adapter contract checks for Phase 1)
+- `scripts/test_phase2_verify_restore.sh` (verify/restore contract checks for Phase 2)
+- `scripts/test_phase3_backends.sh` (backend reliability contract checks for Phase 3)
+- `scripts/test_phase4_docs_handoff.sh` (docs + handoff contract checks for Phase 4)
+- `scripts/test_phase5_release_readiness.sh` (release evidence + launch packet checks for Phase 5)
 
 Core implementation paths:
 - `adapters/wordpress/`
@@ -151,6 +163,32 @@ Backend selection:
 - Restore/demo/metrics WP-CLI calls run in safer mode (`--skip-plugins --skip-themes`) to reduce noisy plugin-side warnings during drills
 
 ---
+
+## Marketing site (Node.js)
+
+A professional promo site is included under `site/`.
+
+Run locally:
+
+```bash
+cd site
+npm run dev
+```
+
+Includes: landing page, CTA blocks, FAQ section, and baseline SEO metadata.
+
+## Adoption-first UX (free)
+
+OpenSiteBackup’s free path is intended to be novice-friendly:
+- 1-click install (`bash scripts/install.sh`)
+- guided setup flow (`bash scripts/setup_wizard.sh`)
+- 1-click backup now (`bash scripts/backup_now.sh`)
+- 1-click local restore test (`bash scripts/test_restore_local.sh`)
+- clear recovery confidence checks (`bash scripts/recovery_status.sh`)
+
+Roadmap and packaging details:
+- `docs/PRICING_AND_PACKAGING.md`
+- `strategy/12_month_monetization_roadmap.md`
 
 ## Documentation
 
@@ -210,4 +248,4 @@ The long-term model can support optional managed control-plane features, but the
 
 ## License
 
-MIT — see `LICENSE`.
+GNU General Public License v3.0 (`GPL-3.0`) — see `LICENSE` (relicensed from MIT for commits/releases going forward; prior commits and `v0.1.0-alpha.*` tags remain under MIT).

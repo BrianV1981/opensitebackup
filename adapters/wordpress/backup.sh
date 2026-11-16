@@ -12,9 +12,19 @@ TS="$(date +%Y%m%d_%H%M%S)"
 RUN_DIR="$LOCAL_BACKUP_ROOT/$TS"
 mkdir -p "$RUN_DIR"
 
+REMOTE_CREATED=0
+SSH_OPTS=()
+
 cleanup_on_error() {
   local code=$?
+  trap - EXIT
   if [[ $code -ne 0 ]]; then
+    if [[ "$REMOTE_CREATED" -eq 1 && ${#SSH_OPTS[@]} -gt 0 && -n "${REMOTE_FILES:-}" ]]; then
+      echo "[$(date -Is)] Cleanup: attempting remote temp cleanup after failure ..."
+      # shellcheck disable=SC2029
+      ssh "${SSH_OPTS[@]}" "${LIVE_SSH_USER}@${LIVE_SSH_HOST}" "rm -f '${REMOTE_FILES}' '${REMOTE_DB}' '${REMOTE_SUMS}'" >/dev/null 2>&1 || true
+    fi
+
     if [[ -d "$RUN_DIR" ]] && [[ -z "$(find "$RUN_DIR" -mindepth 1 -maxdepth 1 -print -quit 2>/dev/null)" ]]; then
       rmdir "$RUN_DIR" 2>/dev/null || true
       echo "[$(date -Is)] Cleanup: removed empty failed run dir $RUN_DIR"
@@ -24,9 +34,9 @@ cleanup_on_error() {
 }
 trap cleanup_on_error EXIT
 
-SSH_OPTS="-o IdentitiesOnly=yes -o PreferredAuthentications=publickey"
+SSH_OPTS=(-o IdentitiesOnly=yes -o PreferredAuthentications=publickey)
 if [[ -n "${LIVE_SSH_KEY:-}" ]]; then
-  SSH_OPTS="-i $LIVE_SSH_KEY $SSH_OPTS"
+  SSH_OPTS=(-i "$LIVE_SSH_KEY" "${SSH_OPTS[@]}")
 fi
 
 REMOTE_PREFIX="${SOURCE_SITE_SLUG}_live_${TS}"
@@ -35,7 +45,9 @@ REMOTE_DB="/home/${LIVE_SSH_USER}/${REMOTE_PREFIX}_db.sql"
 REMOTE_SUMS="/home/${LIVE_SSH_USER}/${REMOTE_PREFIX}_sha256.txt"
 
 echo "[$(date -Is)] [1/5] Creating remote archives on ${LIVE_SSH_HOST} ..."
-ssh $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}" bash <<EOF
+REMOTE_CREATED=1
+# shellcheck disable=SC2087
+ssh "${SSH_OPTS[@]}" "${LIVE_SSH_USER}@${LIVE_SSH_HOST}" bash <<EOF
 set -e
 cd "${LIVE_SITE_PATH}"
 if [[ ! -f wp-config.php ]]; then
@@ -63,14 +75,15 @@ ls -lh "${REMOTE_FILES}" "${REMOTE_DB}" "${REMOTE_SUMS}"
 EOF
 
 echo "[$(date -Is)] [2/5] Downloading files archive ..."
-scp $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_FILES}" "$RUN_DIR/"
+scp "${SSH_OPTS[@]}" "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_FILES}" "$RUN_DIR/"
 echo "[$(date -Is)] [3/5] Downloading database dump ..."
-scp $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_DB}" "$RUN_DIR/"
+scp "${SSH_OPTS[@]}" "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_DB}" "$RUN_DIR/"
 echo "[$(date -Is)] [4/5] Downloading checksum manifest ..."
-scp $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_SUMS}" "$RUN_DIR/"
+scp "${SSH_OPTS[@]}" "${LIVE_SSH_USER}@${LIVE_SSH_HOST}:${REMOTE_SUMS}" "$RUN_DIR/"
 
 echo "[$(date -Is)] [5/5] Cleaning remote temp files ..."
-ssh $SSH_OPTS "${LIVE_SSH_USER}@${LIVE_SSH_HOST}" "rm -f '${REMOTE_FILES}' '${REMOTE_DB}' '${REMOTE_SUMS}'"
+# shellcheck disable=SC2029
+ssh "${SSH_OPTS[@]}" "${LIVE_SSH_USER}@${LIVE_SSH_HOST}" "rm -f '${REMOTE_FILES}' '${REMOTE_DB}' '${REMOTE_SUMS}'"
 
 trap - EXIT
 echo "Pulled backup into: $RUN_DIR"

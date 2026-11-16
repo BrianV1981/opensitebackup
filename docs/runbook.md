@@ -32,6 +32,15 @@ bash scripts/quick_run.sh
 bash scripts/quick_run.sh --profile <site-slug>
 ```
 
+Adoption-first one-click style wrappers:
+
+```bash
+bash scripts/first_run.sh
+bash scripts/backup_now.sh
+bash scripts/test_restore_local.sh
+bash scripts/recovery_status.sh
+```
+
 If quick run fails at backup stage, it now prints a direct SSH-prep hint.
 
 If your SSH key is passphrase-protected and session prep runs in non-interactive mode, set:
@@ -138,6 +147,7 @@ RUN_RESTORE_DRILL=1 bash scripts/pre_release_check.sh
 - Never commit secrets or runtime artifacts
 - Keep `main` stable; perform active integration on dev branch
 - Locking is enforced for backup/upload/restore; stale lock handling uses `OSB_LOCK_TIMEOUT_SEC` + `OSB_LOCK_CLEAR_STALE`
+- Backup adapter includes best-effort remote temp cleanup on failures to reduce orphaned sensitive artifacts on live host
 - Logging includes a run identifier (`OSB_RUN_ID`) and supports JSON mode (`OSB_LOG_JSON=1`) for machine parsing
 
 ## 9) Retention and cleanup

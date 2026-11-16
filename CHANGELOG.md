@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased] - 2026-11-16
+### Changed
+- Relicensed repository to **GNU GPL v3.0 (`GPL-3.0`)** going forward (prior commits and `v0.1.0-alpha.*` tags remain under MIT).
+- Promoted `dev/opensitebackup-execution` into `main` as the unified default branch and pruned stale snapshot branches.
+- Fixed ShellCheck (`SC2068`, `SC2086`, `SC2028`, `SC2015`) findings, runtime `data/` doc-link exclusions, and portable `$HOME` paths across `config/env.example` and `docs/`.
+
 ## [Unreleased]
 ### Added
 - Adapter/backend structure:
@@ -101,6 +107,9 @@
 - Added `OSB_MATRIX_INCLUDE_OPTIONAL_BACKENDS` control (default `0` in env example) so doctor/matrix can avoid cloud uploads unless explicitly enabled.
 - Improved Drive init output contract to emit canonical `export DRIVE_*` lines; setup wizard now appends these directly.
 - Added `scripts/prepare_pr_evidence.sh` to generate reviewer-ready evidence bundle from release artifacts.
+- Added professional Node.js marketing site under `site/` with zero-dependency static server and polished landing page content.
+- Added basic SEO assets for marketing site (`robots.txt`, `sitemap.xml`, OpenGraph/canonical metadata).
+- Expanded marketing site with audience/value blocks and FAQ for clearer product positioning.
 - Verify flow now handles empty/missing backup state gracefully with clear first-run guidance (instead of raw `ls` failure).
 - Setup wizard now prompts for `DRIVE_ACCOUNT` when `gog` backend is selected and can auto-wire Drive init IDs.
 - Quick run now emits a clear stage-specific SSH guidance hint when backup auth fails.
